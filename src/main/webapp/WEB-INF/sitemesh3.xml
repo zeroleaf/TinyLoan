@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+    <mapping path="/*" decorator="/WEB-INF/thymeleaf/layout/application.html" />
+    <!--<mapping path="/*" decorator="/WEB-INF/jsp/layout/application.jsp" />-->
+</sitemesh>

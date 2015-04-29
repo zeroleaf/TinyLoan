@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>小微贷 - 借贷</title>
+    </head>
+    <body>
+
+        <div th:include="invest/_nav::navigation"></div>
+
+        <section id="amount">
+            <div class="container">
+                <div class="row animated slideInUp">
+                    <div class="col-sm-6">
+                        <div class="row line-item">
+                            <div class="col-sm-3">账户余额</div>
+                            <div class="col-sm-4 text-center">_______ 元</div>
+                            <div class="col-sm-4">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#recharge">充值</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#advance">提现</button>
+                            </div>
+                        </div>
+                        <div class="row line-item">
+                            <div class="col-sm-3">累计收益</div>
+                            <div class="col-sm-4 text-center">_______ 元</div>
+                        </div>
+                        <div class="row line-item">
+                            <div class="col-sm-3">总投资额</div>
+                            <div class="col-sm-4 text-center">_______ 元</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="analysis">
+                            <h2>投资结构分析</h2>
+                            <div class="img">
+                                <img src="#" alt="投资结构分析图" style="width: 100%; height: auto">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--充值, 提现 模态框-->
+        <%= render 'share/recharge' %>
+        <%= render 'share/advance' %>
+    </body>
+</html>

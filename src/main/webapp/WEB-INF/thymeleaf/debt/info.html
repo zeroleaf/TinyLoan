@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>小微贷 - 借贷</title>
+    </head>
+    <body>
+
+        <div th:include="debt/_nav::navigation"></div>
+
+        <section id="info">
+            <div class="container">
+                <div class="info-center-block animated zoomIn">
+                    <div class="gray-border">
+                        <h2>详细信息</h2>
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="username" class="control-label col-sm-3">用户名</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="username" id="username" value="用户X" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="personal_id" class="control-label col-sm-3">身份证号</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="personal_id" id="personal_id" value="xxxxxxxxxxx" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone_number" class="control-label col-sm-3">手机号</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="手机号" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="credit_number" class="control-label col-sm-3">银行卡号</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="credit_number" id="credit_number" placeholder="银行卡号" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="control-label col-sm-3">邮箱</label>
+                                <div class="col-sm-8">
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="邮箱" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-8">
+                                    <input type="button" class="btn btn-primary" value="确认修改" />
+                                    <a href="index" class="btn btn-default">返回</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </body>
+</html>

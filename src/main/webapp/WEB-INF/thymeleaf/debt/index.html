@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>小微贷 - 借贷</title>
+    </head>
+    <body>
+
+        <div th:include="debt/_nav::navigation"></div>
+
+        <section class="main">
+            <div class="container">
+                <div class="m-t-lg animated slideInDown">
+                    <div class="row">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <div class="item">
+                                <label>账户余额</label>
+                                <p>元</p>
+                                <div class="operation">
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#recharge">充值</button>
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#advance">提现</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <div class="item">
+                                <label>待还金额</label>
+                                <p>元</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-offset-3 col-sm-6">
+                            <div class="item">
+                                <label>累计借款</label>
+                                <p>元</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="m-t-lg">
+                    <div class="row">
+                        <div class="col-sm-offset-1 col-sm-4 animated slideInLeft">
+                            <div class="repayment">
+                                <h2>还款列表</h2>
+                                <div>
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>日期</th>
+                                            <th>金额</th>
+                                            <th>还款状态</th>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>xx</td>
+                                            <td>xx</td>
+                                            <td>xx</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>xx</td>
+                                            <td>xx</td>
+                                            <td>xx</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>xx</td>
+                                            <td>xx</td>
+                                            <td>xx</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-2 col-sm-4 animated slideInRight">
+                            <div class="application-status">
+                                <h2>借款申请状态</h2>
+                                <div class="">
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>借款项目</th>
+                                            <th>日期</th>
+                                            <th>审核状态</th>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>xx</td>
+                                            <td>xx</td>
+                                            <td>xx</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>xx</td>
+                                            <td>xx</td>
+                                            <td>xx</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>xx</td>
+                                            <td>xx</td>
+                                            <td>xx</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div th:include="share/_recharge::recharge"></div>
+        <div th:include="share/_advance::advance"></div>
+
+    </body>
+</html>

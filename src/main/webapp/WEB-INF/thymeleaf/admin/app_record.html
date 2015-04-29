@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>小微贷 - 管理员</title>
+    </head>
+    <body>
+
+        <div th:include="admin/_nav::navigation"></div>
+
+        <section class="main-body">
+            <div class="container">
+                <div class="info-record-table">
+                    <div class="info-control text-right">
+                        <div class="info-control-group">
+                            <label class="info-desc">查询</label>
+                            <select class="form-control info-value">
+                                <option>通过</option>
+                                <option>未通过</option>
+                                <option>未审核</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="info-body">
+                        <div class="info-table">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>#</th>
+                                    <th>申请号</th>
+                                    <th>用户</th>
+                                    <th>申请份数</th>
+                                    <th>申请日期</th>
+                                    <th>申请状态</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="info-nav">
+                            <%= render 'share/pagination' %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </body>
+</html>

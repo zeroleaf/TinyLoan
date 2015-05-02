@@ -84,30 +84,22 @@
                             <div class="application-status">
                                 <h2>借款申请状态</h2>
                                 <div class="">
-                                    <table class="table table-hover">
+                                    <div th:unless="${lafs}">
+                                        <p>您当前没有申请借贷.</p>
+                                    </div>
+
+                                    <table class="table table-hover" th:if="${lafs}">
                                         <tr>
                                             <th>#</th>
                                             <th>借款项目</th>
                                             <th>日期</th>
                                             <th>审核状态</th>
                                         </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>xx</td>
-                                            <td>xx</td>
-                                            <td>xx</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>xx</td>
-                                            <td>xx</td>
-                                            <td>xx</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>xx</td>
-                                            <td>xx</td>
-                                            <td>xx</td>
+                                        <tr th:each="laf,status : ${lafs}">
+                                            <td th:text="${status.count}"></td>
+                                            <td th:text="${laf.pledge}"></td>
+                                            <td th:text="${laf.date}"></td>
+                                            <td th:text="${laf.formatStatus}"></td>
                                         </tr>
                                     </table>
                                 </div>

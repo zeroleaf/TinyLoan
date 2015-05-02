@@ -3,11 +3,13 @@ package com.zeroleaf.web.business.service.impl;
 import com.zeroleaf.web.business.service.LoginResult;
 import com.zeroleaf.web.business.service.UserService;
 import com.zeroleaf.web.domain.dao.UserDAO;
+import com.zeroleaf.web.model.LoanApplicationForm;
 import com.zeroleaf.web.model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by zeroleaf on 2015/5/1.
@@ -54,5 +56,16 @@ public class UserServiceImpl implements UserService {
         dbUser.setPhoneNumber(user.getPhoneNumber());
         dbUser.setCardNumber(user.getCardNumber());
         dbUser.setEmail(user.getEmail());
+    }
+
+    @Override
+    public void addLoanApplicationForm(String nick, LoanApplicationForm laf) {
+        User dbUser = userDAO.findByNick(nick);
+        dbUser.addLoanApplicationForm(laf);
+    }
+
+    @Override
+    public List<LoanApplicationForm> getLoanApplicationForms(String nick, int limit) {
+        return userDAO.getLoanApplicationForms(nick, limit);
     }
 }

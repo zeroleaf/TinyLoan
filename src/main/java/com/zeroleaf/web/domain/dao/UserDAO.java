@@ -1,6 +1,9 @@
 package com.zeroleaf.web.domain.dao;
 
+import com.zeroleaf.web.model.LoanApplicationForm;
 import com.zeroleaf.web.model.User;
+
+import java.util.List;
 
 /**
  * Created by zeroleaf on 2015/5/1.
@@ -18,4 +21,7 @@ public interface UserDAO {
      * @return 该用户名对应的用户.
      */
     User findByNick(String nick);
+
+    List<LoanApplicationForm> getLoanApplicationForms(String nick, int limit);
+
 }

@@ -25,7 +25,7 @@ public class Asset implements Serializable {
     @Column(name = "balance", precision = 20, scale = 2)
     private Double balance;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private User user;
 
     public Long getId() {

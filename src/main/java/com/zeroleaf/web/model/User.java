@@ -51,13 +51,14 @@ public class User implements Serializable {
     @Column(name = "email")
     private String email;
 
+//    TODO 貌似仍旧会查询该字段
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Asset asset;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<AmountFlow> amountFlows = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<LoanApplicationForm> applicationForms = new ArrayList<>();
 
     public User() {
@@ -159,6 +160,13 @@ public class User implements Serializable {
 
     public List<LoanApplicationForm> getApplicationForms() {
         return applicationForms;
+    }
+
+    public void addLoanApplicationForm(LoanApplicationForm laf) {
+        if (laf != null) {
+            applicationForms.add(laf);
+            laf.setUser(this);
+        }
     }
 
     public void setApplicationForms(List<LoanApplicationForm> applicationForms) {

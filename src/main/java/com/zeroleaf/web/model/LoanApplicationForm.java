@@ -3,6 +3,7 @@ package com.zeroleaf.web.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by zeroleaf on 2015/5/1.
@@ -19,6 +20,8 @@ public class LoanApplicationForm implements Serializable {
 
     @Id @GeneratedValue
     private Long id;
+
+    // TODO 添加简单的借款说明, 标题之用.
 
     // 申请单号.
     @Column(name = "code", nullable = false)
@@ -58,10 +61,45 @@ public class LoanApplicationForm implements Serializable {
     @Column(name = "refund", precision = 20, scale = 2)
     private Double refund;
 
+    // TODO 由于该值是通过业务规则计算而来, 所以没必要存该值.
     // 年利率
     @Column(name = "apr", precision = 5, scale = 4)
     private Double apr;
 
+    public LoanApplicationForm() {
+    }
+
+    protected LoanApplicationForm(Integer quantity, String pledge, Integer deadline) {
+        this.quantity = quantity;
+        this.pledge   = pledge;
+        this.deadline = deadline;
+
+        this.price  = 1000.00;
+        this.date   = new Date(System.currentTimeMillis());
+        this.status = UNAUDITED;
+        this.apr    = judgeApr(deadline);
+        this.code   = generateCode();
+    }
+
+    private static Double judgeApr(Integer deadline) {
+        switch (deadline) {
+            case 3:
+                return 0.08;
+            case 6:
+                return 0.09;
+            default:
+                return 0.12;
+        }
+    }
+
+    private static String generateCode() {
+        Random random = new Random();
+        return String.format("%d%06d", System.currentTimeMillis(), random.nextInt(1000000));
+    }
+
+    public static LoanApplicationForm newDefaultInstance(Integer quantity, String pledge, Integer deadline) {
+        return new LoanApplicationForm(quantity, pledge, deadline);
+    }
 
     public Long getId() {
         return id;
@@ -115,8 +153,27 @@ public class LoanApplicationForm implements Serializable {
         return status;
     }
 
+    public String getFormatStatus() {
+        switch (status) {
+            case UNAUDITED:
+                return "未审核";
+            case FAIL:
+                return "未通过";
+            default:
+                return "通过";
+        }
+    }
+
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Integer getDeadline() {

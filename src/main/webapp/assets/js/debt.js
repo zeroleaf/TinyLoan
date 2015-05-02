@@ -33,3 +33,14 @@ debt.controller('PasswordCtrl', function ($scope) {
         { identify: 'confirm',      label: '确认密码'}
     ];
 });
+
+
+debt.controller('LoanCtrl', ['$scope', function ($scope) {
+    $scope.timeLimits = [
+        { limit: 3,  rate: 8,  interest: 1000 * 0.08 * 3 / 12  },
+        { limit: 6,  rate: 9,  interest: 1000 * 0.09 * 6 / 12  },
+        { limit: 12, rate: 12, interest: 1000 * 0.12 * 12 / 12 }
+    ];
+
+    $scope.timeLimit = $scope.timeLimits[0];
+}]);

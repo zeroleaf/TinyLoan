@@ -1,0 +1,44 @@
+// Place all the styles related to the invest controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$font-lg: 1.8em;
+
+.font-lg {
+  font-size: $font-lg;
+}
+
+.line-item {
+  font-size: $font-lg;
+  margin: 10px 0 0 0;
+}
+
+#amount {
+  margin-top: 60px;
+}
+
+.investment .investment-item {
+  margin: 15px 25px;
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+}
+
+.investment h2 {
+  margin: 20px auto 20px 20px;
+}
+
+.investment-item {
+  font-size: 1.2em;
+}
+
+.investment-item .title {
+  text-align: left;
+  margin: auto auto 20px 20px;
+}
+
+.entry p:first-child {
+  border-bottom: 1px solid #808080;
+  padding-bottom: 3px;
+  margin-bottom: 6px;
+}
+

@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
             return LoginResult.USER_NOT_EXIST;
         }
         if (password.equals(user.getPassword())) {
-            return LoginResult.SUCCESS;
+            return LoginResult.newSuccess(user.getType());
         }
         return LoginResult.PASSWORD_NOT_MATCH;
     }

@@ -13,7 +13,7 @@ import java.util.List;
 public class User implements Serializable {
 
     // 借款人
-    public static final int BORROWER = 1;
+    public static final int DEBTOR   = 1;
 
     // 投资人
     public static final int INVESTOR = 2;
@@ -59,6 +59,15 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<LoanApplicationForm> applicationForms = new ArrayList<>();
+
+    public User() {
+    }
+
+    public User(String nick, String password, Integer type) {
+        this.nick = nick;
+        this.password = password;
+        this.type = type;
+    }
 
     public Long getId() {
         return id;

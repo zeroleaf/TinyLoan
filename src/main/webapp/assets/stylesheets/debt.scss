@@ -1,0 +1,48 @@
+// Place all the styles related to the debt controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.m-t-lg {
+  margin-top: 30px;
+}
+
+.item {
+  font-size: 1.8em;
+}
+
+.item label {
+  width: 25%;
+  text-align: center;
+}
+
+.item p {
+  width: 40%;
+  display: inline-block;
+  text-align: center;
+}
+
+.item p:before {
+  content: '_______ ';
+}
+
+.operation {
+  display: inline-block;
+}
+
+//我要借款页面
+
+.gray-border {
+  border: 1px solid #CCCCCC;
+  border-radius: 4px;
+  background: #f4f4f4;
+}
+
+.info-center-block {
+  width: 50%;
+  margin: 60px auto auto auto;
+  display: block;
+}
+
+.info-center-block h2 {
+  margin: 20px 20px;
+}

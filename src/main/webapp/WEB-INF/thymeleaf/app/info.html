@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="myApp" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>小微贷 - 借贷</title>
+
+        <link href="/res/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/res/animate.css/animate.css" rel="stylesheet">
+    </head>
+    <body>
+
+        <div th:include="debt/_nav::navigation" th:if="${user.type == 1}"></div>
+
+        <section id="info">
+            <div class="container">
+                <div class="info-center-block animated zoomIn">
+                    <div class="gray-border">
+                        <h2>详细信息</h2>
+                        <form action="/info/change" method="post" role="form" class="form-horizontal">
+                            <div class="form-group">
+                                <label for="username" class="control-label col-sm-3">用户名</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="username" id="username" disabled th:value="${user.nick}" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="idNumber" class="control-label col-sm-3">身份证号</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="idNumber" id="idNumber" th:value="${user.idNumber}" th:disabled="${user.idNumber}" placeholder="身份证号" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="control-label col-sm-3">姓名</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="name" id="name" th:value="${user.name}" placeholder="姓名" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phoneNumber" class="control-label col-sm-3">手机号</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" th:value="${user.phoneNumber}" placeholder="手机号" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cardNumber" class="control-label col-sm-3">银行卡号</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="cardNumber" id="cardNumber" th:value="${user.cardNumber}" placeholder="银行卡号" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="control-label col-sm-3">邮箱</label>
+                                <div class="col-sm-8">
+                                    <input type="email" class="form-control" name="email" id="email" th:value="${user.email}" placeholder="邮箱" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-8">
+                                    <button type="submit" class="btn btn-primary">确认修改</button>
+                                    <a href="/debt/index" class="btn btn-default" th:if="${user.type == 1}">返回</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--<script src="/res/angular/angular.min.js"></script>-->
+        <!--<script src="/res/angular-bootstrap/ui-bootstrap.min.js"></script>-->
+        <!--<script src="/assets/js/app.js"></script>-->
+    </body>
+</html>

@@ -51,7 +51,7 @@ public class User implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Asset asset;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)

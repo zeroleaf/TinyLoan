@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html ng-app="debt" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>小微贷 - 借贷</title>
+
+        <link href="/res/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/res/animate.css/animate.css" rel="stylesheet">
     </head>
     <body>
 
@@ -118,5 +121,8 @@
         <div th:include="share/_recharge::recharge"></div>
         <div th:include="share/_advance::advance"></div>
 
+        <script src="/res/angular/angular.min.js"></script>
+        <script src="/res/angular-bootstrap/ui-bootstrap.min.js"></script>
+        <script src="/assets/js/debt.js"></script>
     </body>
 </html>

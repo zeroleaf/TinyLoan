@@ -4,7 +4,7 @@
     <body>
 
         <div th:fragment="navigation">
-            <section>
+            <section ng-controller="NavigationCtrl">
                 <nav class="navbar navbar-default">
                     <div class="container-fluid">
                         <!-- Brand and toggle get grouped for better mobile display -->
@@ -23,17 +23,28 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="#">消息 <span class="badge">42</span></a></li>
                                 <li><a href="loan">借款</a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">用户X <span class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="info">个人信息</a></li>
-                                        <li><a href="record">交易记录</a></li>
-                                        <li><a href="#">我的借款</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">密码修改</a></li>
-                                        <li><a href="#">退出</a></li>
-                                    </ul>
+
+                                <!--TODO 优化显示-->
+                                <!-- Split button -->
+                                <li class="">
+                                    <!-- Split button -->
+                                    <div class="btn-group" dropdown>
+                                        <button type="button" class="btn" th:text="${session.user.nick}"></button>
+                                        <button type="button" class="btn dropdown-toggle" dropdown-toggle>
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Split button!</span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="/info/change">个人信息</a></li>
+                                            <li><a href="record">交易记录</a></li>
+                                            <li><a href="#">我的借款</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="/password/reset">密码修改</a></li>
+                                            <li><a href="/logout">退出</a></li>
+                                        </ul>
+                                    </div>
                                 </li>
+
                             </ul>
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->

@@ -30,8 +30,29 @@ public class UserServiceImpl implements UserService {
             return LoginResult.USER_NOT_EXIST;
         }
         if (password.equals(user.getPassword())) {
-            return LoginResult.newSuccess(user.getType());
+            return LoginResult.newSuccess(user);
         }
         return LoginResult.PASSWORD_NOT_MATCH;
+    }
+
+    @Override
+    public boolean changePassword(String nick, String old, String password) {
+        User user = userDAO.findByNick(nick);
+        if (!old.equals(user.getPassword())) {
+            return false;
+        }
+
+        user.setPassword(password);
+        return true;
+    }
+
+    @Override
+    public void updateInfo(User user) {
+        User dbUser = userDAO.findByNick(user.getNick());
+        dbUser.setIdNumber(user.getIdNumber());
+        dbUser.setName(user.getName());
+        dbUser.setPhoneNumber(user.getPhoneNumber());
+        dbUser.setCardNumber(user.getCardNumber());
+        dbUser.setEmail(user.getEmail());
     }
 }

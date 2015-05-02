@@ -1,5 +1,7 @@
 package com.zeroleaf.web.business.service;
 
+import com.zeroleaf.web.model.User;
+
 /**
  * Created by zeroleaf on 2015/5/1.
  */
@@ -10,25 +12,25 @@ public class LoginResult {
     public static final String MSG_SUCCESS              = "登陆成功";
 
     public static final LoginResult USER_NOT_EXIST
-            = new LoginResult(false, MSG_USER_NOT_EXIST,     -1);
+            = new LoginResult(false, MSG_USER_NOT_EXIST,     null);
 
     public static final LoginResult PASSWORD_NOT_MATCH
-            = new LoginResult(false, MSG_PASSWORD_NOT_MATCH, -1);
+            = new LoginResult(false, MSG_PASSWORD_NOT_MATCH, null);
 
     private final boolean isValid;
 
     private final String msg;
 
-    private final Integer type;
+    private final User user;
 
-    protected LoginResult(boolean isValid, String msg, Integer type) {
+    protected LoginResult(boolean isValid, String msg, User user) {
         this.isValid = isValid;
         this.msg     = msg;
-        this.type    = type;
+        this.user    = user;
     }
 
-    public static LoginResult newSuccess(Integer type) {
-        return new LoginResult(true, MSG_SUCCESS, type);
+    public static LoginResult newSuccess(User user) {
+        return new LoginResult(true, MSG_SUCCESS, user);
     }
 
     public boolean isValid() {
@@ -39,8 +41,27 @@ public class LoginResult {
         return msg;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     public Integer getType() {
-        return type;
+        return user.getType();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LoginResult)) return false;
+
+        LoginResult result = (LoginResult) o;
+
+        return user.equals(result.user);
+    }
+
+    @Override
+    public int hashCode() {
+        return user.hashCode();
     }
 
     @Override
@@ -48,7 +69,7 @@ public class LoginResult {
         return "LoginResult{" +
                 "isValid=" + isValid +
                 ", msg='" + msg + '\'' +
-                ", type=" + type +
+                ", user=" + user +
                 '}';
     }
 }

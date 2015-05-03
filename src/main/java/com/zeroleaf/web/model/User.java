@@ -54,7 +54,7 @@ public class User implements Serializable {
     private String email;
 
 //    TODO 貌似仍旧会查询该字段
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy =  "user", cascade = CascadeType.ALL)
     private Asset asset;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
@@ -149,7 +149,10 @@ public class User implements Serializable {
     }
 
     public void setAsset(Asset asset) {
-        this.asset = asset;
+        if (asset != null) {
+            this.asset = asset;
+            asset.setUser(this);
+        }
     }
 
     public List<AmountFlow> getAmountFlows() {

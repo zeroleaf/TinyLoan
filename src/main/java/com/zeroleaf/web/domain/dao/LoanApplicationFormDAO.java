@@ -12,4 +12,6 @@ public interface LoanApplicationFormDAO {
     List<LoanApplicationForm> getUnaudited(int pos, int limit);
 
     LoanApplicationForm findById(Long id);
+
+    List<LoanApplicationForm> getInvestable(int pos, int limit);
 }

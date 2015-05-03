@@ -33,6 +33,7 @@ public class DebtController {
         User user = (User) session.getAttribute("user");
         List<LoanApplicationForm> lafs = userService.getLoanApplicationForms(user.getNick(), 5);
 
+        map.addAttribute("user", user);
         map.addAttribute("lafs", lafs);
 
         return "debt/index";
@@ -53,11 +54,12 @@ public class DebtController {
         }
 
         String nick      = ((User) request.getSession().getAttribute("user")).getNick();
+        String title     = request.getParameter("title");
         String pledge    = request.getParameter("pledge");
         Integer quantity = Integer.valueOf(request.getParameter("quantity"));
         Integer deadline = Integer.valueOf(request.getParameter("deadline"));
         LoanApplicationForm laf =
-                LoanApplicationForm.newDefaultInstance(quantity, pledge, deadline);
+                LoanApplicationForm.newDefaultInstance(title, quantity, pledge, deadline);
         userService.addLoanApplicationForm(nick, laf);
         return "redirect:/debt/index";
     }

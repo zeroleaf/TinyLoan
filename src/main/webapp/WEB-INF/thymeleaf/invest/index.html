@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html ng-app="invest" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>小微贷 - 借贷</title>
+
+        <link href="/res/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+        <link href="/res/animate.css/animate.css" rel="stylesheet">
+        <link href="/assets/css/common.css" rel="stylesheet">
+        <link href="/assets/css/invest.css" rel="stylesheet">
     </head>
     <body>
 
@@ -11,101 +16,53 @@
 
         <section id="main">
             <div class="container">
-                <div class="investment animated zoomIn">
-                    <div class="gray-border">
-                        <h2>投资项目</h2>
-                        <div class="row investment-item text-center">
-                            <div class="title">
-                                <h3>密度板实业扩大生产规模</h3>
+                <div class="investment animated zoomIn" ng-controller="ModalCtrl">
+                    <div class="info" style="display: none">
+                        <!--TODO 更好的前后端数据交互-->
+                        <input type="text" id="balance" th:value="${user.asset.balance}" ng-model="balance">
+                    </div>
+                    <div class="b-g-container">
+                        <div class="m-t-lg-x1">
+                            <div th:if="${lafs.isEmpty()}">
+                                <p>当前没有可投资的项目!</p>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="col-sm-2 entry">
-                                    <p>30</p>
-                                    <p>份数</p>
-                                </div>
-                                <div class="col-sm-2 entry">
-                                    <p>3个月</p>
-                                    <p>期限</p>
-                                </div>
-                                <div class="col-sm-2 entry">
-                                    <p>8%</p>
-                                    <p>年利率</p>
-                                </div>
-                                <div class="col-sm-6 entry">
-                                    <p>1020</p>
-                                    <p>单份到期回款金额</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="col-sm-6">
-                                    融资进度
-                                </div>
-                                <div class="col-sm-6">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">投资</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row investment-item text-center">
-                            <div class="title">
-                                <h3>密度板实业扩大生产规模</h3>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="col-sm-2 entry">
-                                    <p>30</p>
-                                    <p>份数</p>
-                                </div>
-                                <div class="col-sm-2 entry">
-                                    <p>3个月</p>
-                                    <p>期限</p>
-                                </div>
-                                <div class="col-sm-2 entry">
-                                    <p>8%</p>
-                                    <p>年利率</p>
-                                </div>
-                                <div class="col-sm-6 entry">
-                                    <p>1020</p>
-                                    <p>单份到期回款金额</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="col-sm-6">
-                                    融资完成
-                                </div>
-                                <div class="col-sm-6">
-                                    <button type="button" class="btn btn-primary" disabled>投资</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row investment-item text-center">
-                            <div class="title">
-                                <h3>密度板实业扩大生产规模</h3>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="col-sm-2 entry">
-                                    <p>30</p>
-                                    <p>份数</p>
-                                </div>
-                                <div class="col-sm-2 entry">
-                                    <p>3个月</p>
-                                    <p>期限</p>
-                                </div>
-                                <div class="col-sm-2 entry">
-                                    <p>8%</p>
-                                    <p>年利率</p>
-                                </div>
-                                <div class="col-sm-6 entry">
-                                    <p>1020</p>
-                                    <p>单份到期回款金额</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="col-sm-6">
-                                    融资完成
-                                </div>
-                                <div class="col-sm-6">
-                                    <button type="button" class="btn btn-primary" disabled>投资</button>
+                            <div th:unless="${lafs.isEmpty()}">
+                                <div class="invest">
+                                    <h2>投资项目</h2>
+                                    <div class="content">
+                                        <div th:each="laf : ${lafs}" class="row invest-item text-center">
+                                            <div class="title">
+                                                <h3 th:text="${laf.title}"></h3>
+                                            </div>
+                                            <div class="col-sm-6 explain">
+                                                <div class="col-sm-2 entry">
+                                                    <p th:text="${laf.quantity}"></p>
+                                                    <p>份数</p>
+                                                </div>
+                                                <div class="col-sm-2 entry">
+                                                    <p th:text="${laf.deadline}"></p>
+                                                    <p>期限</p>
+                                                </div>
+                                                <div class="col-sm-2 entry">
+                                                    <p th:text="${laf.apr}"></p>
+                                                    <p>年利率</p>
+                                                </div>
+                                                <div class="col-sm-6 entry">
+                                                    <p th:text="${laf.calRefund()}"></p>
+                                                    <p>单份到期回款金额</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 oper">
+                                                <div class="col-sm-6">
+                                                    <p th:text="${laf.progressString}"></p>
+                                                    <p>融资进度</p>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <button type="button" class="btn btn-primary" th:id="${laf.id}" th:value="${laf.toRaiseQuantity}" ng-click="open($event)">投资</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -114,40 +71,9 @@
             </div>
         </section>
 
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">投资</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal">
-                            <div class="form-group">
-                                <label for="balance" class="control-label col-sm-2 col-sm-offset-2">账户余额</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" name="balance" id="balance" placeholder="账户余额" disabled />
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="investment-number" class="control-label col-sm-2 col-sm-offset-2">投资份数</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" name="investment-number" id="investment-number" placeholder="投资份数" />
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">确认投资</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <script src="/res/jquery/dist/jquery.js"></script>
+        <script src="/res/angular/angular.min.js"></script>
+        <script src="/res/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script src="/assets/js/invest.js"></script>
     </body>
 </html>

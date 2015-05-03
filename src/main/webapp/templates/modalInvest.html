@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h3>投资</h3>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="balance" class="control-label col-sm-2 col-sm-offset-2">账户余额</label>
+            <div class="col-sm-6">
+                <input type="text" value="{{balance}}" class="form-control" id="balance" disabled />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="investment-number" class="control-label col-sm-2 col-sm-offset-2">投资份数</label>
+            <div class="col-sm-6">
+                <input ng-model="amount" type="text" class="form-control" id="investment-number" placeholder="请输入 1 至 {{quantity}} 之间的整数" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8" style="color: #b92c28">
+                <p id="error" class="message toggled"></p>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-warning" ng-click="cancel()">Close</button>
+    <button type="button" class="btn btn-primary" ng-click="invest()">确认投资</button>
+</div>

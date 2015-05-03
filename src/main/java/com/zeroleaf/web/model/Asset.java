@@ -2,6 +2,7 @@ package com.zeroleaf.web.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by zeroleaf on 2015/5/1.
@@ -27,6 +28,27 @@ public class Asset implements Serializable {
 
     @OneToOne(fetch = FetchType.LAZY)
     private User user;
+
+    protected Asset() {
+    }
+
+    protected Asset(Long account) {
+        this.account = account;
+        this.balance = 0.00;
+    }
+
+    public static Asset newEmptyAsset() {
+        return new Asset(generateAccount());
+    }
+
+    private static AtomicLong accountGenerator = new AtomicLong(0);
+    public static Long generateAccount() {
+        return accountGenerator.incrementAndGet();
+    }
+
+    //----------------------------------------------------------------------
+    // Getter 与 Setter 方法.
+    //----------------------------------------------------------------------
 
     public Long getId() {
         return id;

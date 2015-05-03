@@ -3,6 +3,7 @@ package com.zeroleaf.web.business.service.impl;
 import com.zeroleaf.web.business.service.LoginResult;
 import com.zeroleaf.web.business.service.UserService;
 import com.zeroleaf.web.domain.dao.UserDAO;
+import com.zeroleaf.web.model.Asset;
 import com.zeroleaf.web.model.LoanApplicationForm;
 import com.zeroleaf.web.model.User;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,10 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDAO;
 
     @Override
-    public Long save(User user) {
+    public Long newUser(User user) {
+        if (user.getAsset() == null) {
+            user.setAsset(Asset.newEmptyAsset());
+        }
         return userDAO.save(user);
     }
 
@@ -67,5 +71,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<LoanApplicationForm> getLoanApplicationForms(String nick, int limit) {
         return userDAO.getLoanApplicationForms(nick, limit);
+    }
+
+    @Override
+    public User findByNick(String nick) {
+        return userDAO.findByNick(nick);
     }
 }

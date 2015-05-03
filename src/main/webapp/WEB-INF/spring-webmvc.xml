@@ -10,6 +10,7 @@
     <mvc:annotation-driven />
     <mvc:resources mapping="/res/**" location="res/" />
     <mvc:resources mapping="/assets/**" location="assets/" />
+    <mvc:resources mapping="/templates/**" location="templates/" />
 
     <mvc:view-controller path="/WEB-INF/thymeleaf/layout/application.html" view-name="layout/application" />
 

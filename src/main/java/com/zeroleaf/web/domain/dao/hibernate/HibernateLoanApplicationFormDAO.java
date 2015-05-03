@@ -31,4 +31,13 @@ public class HibernateLoanApplicationFormDAO implements LoanApplicationFormDAO {
         return (LoanApplicationForm) sessionFactory.getCurrentSession()
                 .get(LoanApplicationForm.class, id);
     }
+
+    @Override @SuppressWarnings("unchecked")
+    public List<LoanApplicationForm> getInvestable(int pos, int limit) {
+        final String hql = "FROM LoanApplicationForm WHERE status = 2 AND raiseQuantity < quantity ORDER BY date DESC, id DESC";
+        return (List<LoanApplicationForm>) sessionFactory.getCurrentSession().createQuery(hql)
+                .setFirstResult(pos)
+                .setMaxResults(limit)
+                .list();
+    }
 }

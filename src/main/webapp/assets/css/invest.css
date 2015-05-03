@@ -1,0 +1,8 @@
+
+.message {
+    display: block;
+}
+
+.message.toggled {
+    display: none;
+}

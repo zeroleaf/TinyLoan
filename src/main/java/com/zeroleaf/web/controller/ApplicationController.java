@@ -41,7 +41,7 @@ public class ApplicationController {
         Integer type    = Integer.valueOf(request.getParameter("type"));
 
         User user = new User(nick, password, type);
-        userService.save(user);
+        userService.newUser(user);
 
         return "redirect:/";
     }

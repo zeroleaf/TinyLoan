@@ -7,6 +7,7 @@
 
         <link href="/res/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="/res/animate.css/animate.css" rel="stylesheet">
+        <link href="/assets/css/debt.css" rel="stylesheet">
     </head>
     <body>
 
@@ -19,6 +20,7 @@
                         <div class="col-sm-offset-3 col-sm-6">
                             <div class="item">
                                 <label>账户余额</label>
+                                <span th:text="${user.asset.balance}"></span>
                                 <p>元</p>
                                 <div class="operation">
                                     <button class="btn btn-primary" data-toggle="modal" data-target="#recharge">充值</button>
@@ -97,7 +99,7 @@
                                         </tr>
                                         <tr th:each="laf,status : ${lafs}">
                                             <td th:text="${status.count}"></td>
-                                            <td th:text="${laf.pledge}"></td>
+                                            <td th:text="${laf.title}"></td>
                                             <td th:text="${laf.date}"></td>
                                             <td th:text="${laf.formatStatus}"></td>
                                         </tr>

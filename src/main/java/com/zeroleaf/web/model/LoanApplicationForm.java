@@ -3,6 +3,7 @@ package com.zeroleaf.web.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -14,14 +15,20 @@ import java.util.Random;
 @Table(name = "loan_application_form")
 public class LoanApplicationForm implements Serializable {
 
+    // 审核状态
     public static final int UNAUDITED = 1;  // 未审核
     public static final int PASS      = 2;  // 通过
     public static final int DENY      = 4;  // 未通过
 
+    // 借贷状态
+    public static final String FREEZE    = "正在融资";   // 冻结, 即未完成.
+    public static final String DONE      = "融资完成";   // 完成.
+
     @Id @GeneratedValue
     private Long id;
 
-    // TODO 添加简单的借款说明, 标题之用.
+    @Column(name = "title")
+    private String title;
 
     // 申请单号.
     @Column(name = "code", nullable = false)
@@ -30,6 +37,9 @@ public class LoanApplicationForm implements Serializable {
     // TODO 检验该值 10 <= x <= 30
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
+
+    @Column(name = "raise_quantity")
+    private Integer raiseQuantity = 0;
 
     // TODO 当前该值固定为 1000.00
     // 每份的金额.
@@ -40,16 +50,25 @@ public class LoanApplicationForm implements Serializable {
     @Column(name = "pledge")
     private String pledge;
 
+    // 申请日期.
     @Temporal(TemporalType.DATE)
     @Column(name = "date", nullable = false)
     private Date date;
 
-    // 申请状态.
+    // 借款日期, 全部份数都筹集到的日期.
+    @Temporal(TemporalType.DATE)
+    @Column(name = "loan_date")
+    private Date loanDate;
+
+    // 审核状态.
     @Column(name = "status", nullable = false)
     private Integer status;
 
     @ManyToOne()
     private User user;
+
+    @OneToMany(mappedBy = "form", cascade = CascadeType.ALL)
+    private List<LoanTrade> trades;
 
     // ------- 借款类型 -------
 
@@ -69,7 +88,8 @@ public class LoanApplicationForm implements Serializable {
     public LoanApplicationForm() {
     }
 
-    protected LoanApplicationForm(Integer quantity, String pledge, Integer deadline) {
+    protected LoanApplicationForm(String title, Integer quantity, String pledge, Integer deadline) {
+        this.title    = title;
         this.quantity = quantity;
         this.pledge   = pledge;
         this.deadline = deadline;
@@ -97,8 +117,8 @@ public class LoanApplicationForm implements Serializable {
         return String.format("%d%06d", System.currentTimeMillis(), random.nextInt(1000000));
     }
 
-    public static LoanApplicationForm newDefaultInstance(Integer quantity, String pledge, Integer deadline) {
-        return new LoanApplicationForm(quantity, pledge, deadline);
+    public static LoanApplicationForm newDefaultInstance(String title, Integer quantity, String pledge, Integer deadline) {
+        return new LoanApplicationForm(title, quantity, pledge, deadline);
     }
 
     public Long getId() {
@@ -107,6 +127,14 @@ public class LoanApplicationForm implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getCode() {
@@ -200,6 +228,73 @@ public class LoanApplicationForm implements Serializable {
         this.apr = apr;
     }
 
+    public Integer getRaiseQuantity() {
+        return raiseQuantity;
+    }
+
+    public void setRaiseQuantity(Integer raiseQuantity) {
+        this.raiseQuantity = raiseQuantity;
+    }
+
+    public Date getLoanDate() {
+        return loanDate;
+    }
+
+    public void setLoanDate(Date loanDate) {
+        this.loanDate = loanDate;
+    }
+
+    public List<LoanTrade> getTrades() {
+        return trades;
+    }
+
+    public void setTrades(List<LoanTrade> trades) {
+        this.trades = trades;
+    }
+
+    //----------------------------------------------------------------------
+    // 业务规则方法.
+    //----------------------------------------------------------------------
+
+    public String getProgressString() {
+        return String.format("%d/%d", raiseQuantity, quantity);
+    }
+
+    public void addLoanTrade(LoanTrade trade) {
+        if (trade != null) {
+            trades.add(trade);
+            trade.setForm(this);
+
+            raiseQuantity += trade.getQuantity();
+            if (raiseQuantity >= quantity) {
+                loanDate = new Date(System.currentTimeMillis());
+            }
+        }
+    }
+
+    /**
+     * 获取字符串表示的借款状态.
+     *
+     * @return 借款状态.
+     */
+    public String getLoanStatus() {
+        return raiseQuantity < quantity ? FREEZE : DONE;
+    }
+
+    public String calRefund() {
+        Double refund = price * judgeApr(deadline) * deadline / 12;
+        return String.format("%.2f", refund);
+    }
+
+    /**
+     * 获取待筹集份数.
+     *
+     * @return 待筹集份数.
+     */
+    public int getToRaiseQuantity() {
+        return quantity - raiseQuantity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -219,6 +314,7 @@ public class LoanApplicationForm implements Serializable {
     public String toString() {
         return "LoanApplicationForm{" +
                 "id=" + id +
+                ", title='" + title + '\'' +
                 ", code='" + code + '\'' +
                 ", quantity=" + quantity +
                 ", price=" + price +

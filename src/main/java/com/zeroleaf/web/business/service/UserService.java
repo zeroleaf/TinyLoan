@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface UserService {
 
-    Long save(User user);
+    Long newUser(User user);
 
     LoginResult login(String nick, String password);
 
@@ -31,4 +31,6 @@ public interface UserService {
     void addLoanApplicationForm(String nick, LoanApplicationForm laf);
 
     List<LoanApplicationForm> getLoanApplicationForms(String nick, int limit);
+
+    User findByNick(String nick);
 }

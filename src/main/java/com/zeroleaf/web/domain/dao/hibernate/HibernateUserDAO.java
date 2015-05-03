@@ -33,7 +33,7 @@ public class HibernateUserDAO implements UserDAO {
 
     @Override @SuppressWarnings("unchecked")
     public List<LoanApplicationForm> getLoanApplicationForms(String nick, int limit) {
-        final String hql = "FROM LoanApplicationForm laf WHERE laf.user.nick = :nick ORDER BY laf.date DESC";
+        final String hql = "FROM LoanApplicationForm laf WHERE laf.user.nick = :nick ORDER BY laf.date DESC, laf.id DESC";
         return (List<LoanApplicationForm>) sessionFactory.getCurrentSession().createQuery(hql)
                 .setString("nick", nick)
                 .setMaxResults(limit)

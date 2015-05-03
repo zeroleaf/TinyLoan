@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>小微贷 - 管理员</title>
+
+    <link href="/res/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/res/animate.css/animate.css" rel="stylesheet">
+    <link href="/assets/css/admin.css" rel="stylesheet">
 </head>
 <body>
 
@@ -18,7 +22,7 @@
             <div id="sidebar-wrapper">
                 <ul class="sidebar-nav">
                     <li class="sidebar-brand"><a href="#">功能选项</a></li>
-                    <li><a href="#">借款申请审核</a></li>
+                    <li><a href="/admin/audit">借款申请审核</a></li>
                     <li>
                         <a href="#" class="sub_toggle">信息查询</a>
                         <ul class="sub_menu">
@@ -122,11 +126,12 @@
             $(ele).bind('click', function (e) {
                 var $target = $(e.target);
                 $target.siblings(':last').toggleClass('toggled');
-//                console.info($target.siblings(":last"));
             });
         });
     </script>
 
-
+    <script src="/res/angular/angular.min.js"></script>
+    <script src="/res/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="/assets/js/debt.js"></script>
 </body>
 </html>

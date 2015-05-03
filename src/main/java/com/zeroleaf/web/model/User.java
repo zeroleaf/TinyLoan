@@ -12,6 +12,8 @@ import java.util.List;
 @Table(name = "user")
 public class User implements Serializable {
 
+    public static final int ADMIN    = -1;
+
     // 借款人
     public static final int DEBTOR   = 1;
 
@@ -58,7 +60,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<AmountFlow> amountFlows = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<LoanApplicationForm> applicationForms = new ArrayList<>();
 
     public User() {

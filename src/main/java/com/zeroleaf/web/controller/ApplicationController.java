@@ -65,6 +65,8 @@ public class ApplicationController {
                     return "redirect:/debt/index";
                 case User.INVESTOR:
                     return "redirect:/invest/index";
+                case User.ADMIN:
+                    return "redirect:/admin/index";
             }
         }
 

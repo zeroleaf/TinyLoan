@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="admin" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>小微贷</title>
+
+        <link href="/res/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+        <link href="/res/animate.css/animate.css" rel="stylesheet">
+        <link href="/assets/css/admin.css" rel="stylesheet">
+    </head>
+    <body>
+
+        <div th:include="admin/_nav::navigation"></div>
+
+        <section id="audit_section">
+            <div class="container m-t-lg-x1">
+                <div class="b-g-container">
+                    <div class="exhibition">
+                        <div class="explain">
+                            <h2>待审核借款申请</h2>
+                        </div>
+                        <div class="content m-t-lg-x1">
+                            <div class="message" th:if="${lafs.isEmpty()}">
+                                <p>当前没有待审核的借款申请.</p>
+                            </div>
+                            <div class="table" th:unless="${lafs.isEmpty()}">
+                                <table class="table table-hover table-striped">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>申请号</th>
+                                        <th>用户名</th>
+                                        <th>申请份数</th>
+                                        <th>借款时限</th>
+                                        <th>资产抵押说明</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    <tr th:each="laf, status : ${lafs}">
+                                        <td th:text="${status.count}"></td>
+                                        <td th:text="${laf.code}"></td>
+                                        <td th:text="${laf.user.nick}"></td>
+                                        <td th:text="${laf.quantity}"></td>
+                                        <td th:text="${laf.deadline}"></td>
+                                        <td th:text="${laf.pledge}"></td>
+                                        <td>
+                                            <button ty-audit="pass" type="button" class="btn btn-info pass" th:value="${laf.id}">通过</button>
+                                            <button ty-audit="deny" type="button" class="btn btn-danger deny" th:value="${laf.id}">不通过</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--<script src="/res/jquery/dist/jquery.js"></script>-->
+        <script src="/res/angular/angular.js"></script>
+        <script src="/res/angular-bootstrap/ui-bootstrap.js"></script>
+        <script src="/res/angular-resource/angular-resource.js"></script>
+        <script src="/assets/js/admin.js"></script>
+    </body>
+</html>

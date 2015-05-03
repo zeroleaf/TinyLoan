@@ -16,7 +16,7 @@ public class LoanApplicationForm implements Serializable {
 
     public static final int UNAUDITED = 1;  // 未审核
     public static final int PASS      = 2;  // 通过
-    public static final int FAIL      = 4;  // 未通过
+    public static final int DENY      = 4;  // 未通过
 
     @Id @GeneratedValue
     private Long id;
@@ -48,7 +48,7 @@ public class LoanApplicationForm implements Serializable {
     @Column(name = "status", nullable = false)
     private Integer status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     private User user;
 
     // ------- 借款类型 -------
@@ -157,7 +157,7 @@ public class LoanApplicationForm implements Serializable {
         switch (status) {
             case UNAUDITED:
                 return "未审核";
-            case FAIL:
+            case DENY:
                 return "未通过";
             default:
                 return "通过";

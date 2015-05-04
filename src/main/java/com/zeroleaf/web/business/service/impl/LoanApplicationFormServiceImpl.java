@@ -2,6 +2,7 @@ package com.zeroleaf.web.business.service.impl;
 
 import com.zeroleaf.web.business.service.LoanApplicationFormService;
 import com.zeroleaf.web.domain.dao.LoanApplicationFormDAO;
+import com.zeroleaf.web.domain.dao.UserDAO;
 import com.zeroleaf.web.model.LoanApplicationForm;
 import com.zeroleaf.web.model.LoanTrade;
 import com.zeroleaf.web.model.User;
@@ -19,6 +20,9 @@ public class LoanApplicationFormServiceImpl implements LoanApplicationFormServic
 
     @Resource
     private LoanApplicationFormDAO loanApplicationFormDAO;
+
+    @Resource
+    private UserDAO userDAO;
 
     @Override
     public List<LoanApplicationForm> getUnaudited(int page) {
@@ -45,11 +49,22 @@ public class LoanApplicationFormServiceImpl implements LoanApplicationFormServic
 
     @Override
     public void newInvest(User investor, Long id, Integer quantity) {
-        // TODO 对 Asset 做相应的更改, 投资人减少, 平台增加 等.
+        // TODO 增加资金流信息.
         LoanApplicationForm laf = loanApplicationFormDAO.findById(id);
         if (laf != null) {
             LoanTrade trade = LoanTrade.newTrade(investor, quantity);
             laf.addLoanTrade(trade);
+
+            investor.decreaseBalance(trade.getBalance());   // 投资者减少资金.
+            userDAO.update(investor);
+
+            User admin = userDAO.findByNick("admin");       // 平台增加相应资金.
+            admin.increaseBalance(trade.getBalance());
+
+            if (laf.isDone()) {
+                laf.getUser().increaseBalance(laf.getBalance());    // 借贷者增加借贷金额.
+                admin.decreaseBalance(laf.getBalance());            // 平台减少借贷金额.
+            }
         }
     }
 }

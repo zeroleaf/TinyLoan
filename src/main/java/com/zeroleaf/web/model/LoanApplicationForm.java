@@ -256,6 +256,15 @@ public class LoanApplicationForm implements Serializable {
     // 业务规则方法.
     //----------------------------------------------------------------------
 
+    /**
+     * 获取该借款总金额.
+     *
+     * @return 借款总金额.
+     */
+    public double getBalance() {
+        return price * quantity;
+    }
+
     public String getProgressString() {
         return String.format("%d/%d", raiseQuantity, quantity);
     }
@@ -279,6 +288,15 @@ public class LoanApplicationForm implements Serializable {
      */
     public String getLoanStatus() {
         return raiseQuantity < quantity ? FREEZE : DONE;
+    }
+
+    /**
+     * 借款是否完成.
+     *
+     * @return 完成 true; 否则 false.
+     */
+    public boolean isDone() {
+        return raiseQuantity >= quantity;
     }
 
     public String calRefund() {

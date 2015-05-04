@@ -53,7 +53,6 @@ public class User implements Serializable {
     @Column(name = "email")
     private String email;
 
-//    TODO 貌似仍旧会查询该字段
     @OneToOne(mappedBy =  "user", cascade = CascadeType.ALL)
     private Asset asset;
 
@@ -176,6 +175,28 @@ public class User implements Serializable {
 
     public void setApplicationForms(List<LoanApplicationForm> applicationForms) {
         this.applicationForms = applicationForms;
+    }
+
+    //----------------------------------------------------------------------
+    // 业务方法
+    //----------------------------------------------------------------------
+
+    /**
+     * 增加账户余额.
+     *
+     * @param balance 新增资金.
+     */
+    public void increaseBalance(double balance) {
+        asset.setBalance(asset.getBalance() + balance);
+    }
+
+    /**
+     * 减少账户余额.
+     *
+     * @param balance 减少资金.
+     */
+    public void decreaseBalance(double balance) {
+        asset.setBalance(asset.getBalance() - balance);
     }
 
     @Override

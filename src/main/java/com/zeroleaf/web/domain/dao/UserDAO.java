@@ -12,6 +12,8 @@ public interface UserDAO {
 
     Long save(User user);
 
+    void update(User user);
+
     /**
      * 通过 用户名 查找该用户.
      *

@@ -85,4 +85,21 @@ public class LoanTrade {
     public void setInvestor(User investor) {
         this.investor = investor;
     }
+
+    //----------------------------------------------------------------------
+    // 业务逻辑方法.
+    //----------------------------------------------------------------------
+
+    /**
+     * 获取该借款交易金额.
+     *
+     * @return 该借款交易金额.
+     */
+    public Double getBalance() {
+        if (form == null) {
+            throw new IllegalStateException("要获取交易金额必需先关联借款申请.");
+        }
+
+        return quantity * form.getPrice();
+    }
 }

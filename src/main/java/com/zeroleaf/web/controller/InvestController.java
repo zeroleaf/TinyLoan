@@ -34,7 +34,6 @@ public class InvestController {
                         HttpSession session, ModelMap map) {
 
         User user = ((User) session.getAttribute("user"));
-        // TODO refresh 的默认值为?  貌似以下的判断都会执行
         if (refresh != null) {
             user = userService.findByNick(user.getNick());
         }

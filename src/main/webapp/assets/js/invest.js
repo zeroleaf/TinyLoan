@@ -25,7 +25,7 @@ invest.controller('NavigationCtrl', ['$scope', function ($scope) {
 }]);
 
 invest.controller('ModalCtrl', ['$scope', '$modal', function ($scope, $modal) {
-    $scope.balance = document.getElementById('balance').getAttribute('value');
+    $scope.balance = jQuery('#balance').val();
     $scope.open = function ($event, size) {
         var modalInstance = $modal.open({
             animation: true,

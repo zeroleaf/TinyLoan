@@ -24,6 +24,11 @@ public class HibernateUserDAO implements UserDAO {
     }
 
     @Override
+    public void update(User user) {
+        sessionFactory.getCurrentSession().update(user);
+    }
+
+    @Override
     public User findByNick(String nick) {
         final String hql = "FROM User WHERE nick = :nick";
         return (User) sessionFactory.getCurrentSession().createQuery(hql)

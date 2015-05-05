@@ -43,4 +43,14 @@ public class RestController {
         User user = (User) session.getAttribute("user");
         userService.recharge(user, charge, pay);
     }
+
+    @RequestMapping(value = "/asset/advance", method = RequestMethod.POST)
+    @ResponseBody
+    public void advance(@RequestParam Double amount,
+                        @RequestParam String credit,
+                        HttpSession session) {
+
+        User user = (User) session.getAttribute("user");
+        userService.advance(user, amount, credit);
+    }
 }

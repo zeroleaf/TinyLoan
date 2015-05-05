@@ -53,6 +53,7 @@ public class InvestController {
         User user = (User) session.getAttribute("user");
         if (refresh != null) {
             user = userService.findByNick(user.getNick());
+            session.setAttribute("user", user);
         }
         map.addAttribute("user", user);
 

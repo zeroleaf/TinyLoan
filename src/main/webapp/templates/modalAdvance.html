@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h3>提现</h3>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="bal" class="control-label col-sm-2 col-sm-offset-2">账户余额</label>
+            <div class="col-sm-6">
+                <input type="text" id="bal" class="form-control" value="{{balance}}" disabled />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="amount" class="control-label col-sm-2 col-sm-offset-2">提现金额</label>
+            <div class="col-sm-6">
+                <input ng-model="amount" type="number" id="amount" class="form-control" placeholder="提现金额" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="credit" class="control-label col-sm-2 col-sm-offset-2">银行卡号</label>
+            <div class="col-sm-6">
+                <input ng-model="credit" type="text" id="credit" class="form-control" placeholder="银行卡号" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div id="modal-error" class="col-sm-offset-4 col-sm-6 modal-error"></div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-warning" ng-click="cancel()">取消</button>
+    <button type="button" class="btn btn-primary" ng-click="advance()">确认提现</button>
+</div>

@@ -12,27 +12,28 @@ import java.util.List;
 @Table(name = "user")
 public class User implements Serializable {
 
-    public static final int ADMIN    = -1;
+    public static final int ADMIN = -1;
 
     // 借款人
-    public static final int DEBTOR   = 1;
+    public static final int DEBTOR = 1;
 
     // 投资人
     public static final int INVESTOR = 2;
 
     private static final long serialVersionUID = 3007749885262460456L;
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
     // 用户名
-    @Column(name = "nick",      nullable = false, unique = true)
+    @Column(name = "nick", nullable = false, unique = true)
     private String nick;
 
-    @Column(name = "password",  nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "type",      nullable = false)
+    @Column(name = "type", nullable = false)
     private Integer type;
 
     // 身份证号
@@ -53,7 +54,7 @@ public class User implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @OneToOne(mappedBy =  "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Asset asset;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -193,9 +194,26 @@ public class User implements Serializable {
         }
     }
 
+    /**
+     * 充值.
+     *
+     * @param charge 充值金额.
+     * @param type   充值类型.
+     */
     public void recharge(Double charge, String type) {
         increaseBalance(charge);
         addAmountFlow(AmountFlow.newRecharge(charge, type));
+    }
+
+    /**
+     * 提现.
+     *
+     * @param amount 提现金额.
+     * @param credit 提现银行卡号.
+     */
+    public void advance(Double amount, String credit) {
+        decreaseBalance(amount);
+        addAmountFlow(AmountFlow.newAdvance(amount, credit));
     }
 
     /**

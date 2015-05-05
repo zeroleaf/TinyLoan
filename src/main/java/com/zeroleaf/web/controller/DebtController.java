@@ -33,6 +33,7 @@ public class DebtController {
         User user = (User) session.getAttribute("user");
         if (refresh != null) {
             user = userService.findByNick(user.getNick());
+            session.setAttribute("user", user);
         }
         List<LoanApplicationForm> lafs = userService.getLoanApplicationForms(user.getNick(), 5);
 

@@ -83,4 +83,10 @@ public class UserServiceImpl implements UserService {
         User dbUser = userDAO.findById(user.getId());
         dbUser.recharge(charge, type);
     }
+
+    @Override
+    public void advance(User user, Double amount, String credit) {
+        User dbUser = userDAO.findById(user.getId());
+        dbUser.advance(amount, credit);
+    }
 }

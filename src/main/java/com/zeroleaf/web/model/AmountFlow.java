@@ -86,6 +86,11 @@ public class AmountFlow implements Serializable {
         return new AmountFlow(RECHARGE, amount, tradeContent);
     }
 
+    public static AmountFlow newAdvance(double amount, String credit) {
+        String tradeContent = String.format("提现到银行卡 %s", credit);
+        return new AmountFlow(ADVANCE, amount, tradeContent);
+    }
+
     public Long getId() {
         return id;
     }

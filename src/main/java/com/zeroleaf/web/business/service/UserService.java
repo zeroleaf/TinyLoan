@@ -42,4 +42,13 @@ public interface UserService {
      * @param type   付款方式.
      */
     void recharge(User user, Double charge, String type);
+
+    /**
+     * 提现.
+     *
+     * @param user 提现账户.
+     * @param amount 提现金额.
+     * @param credit 提现银行卡号.
+     */
+    void advance(User user, Double amount, String credit);
 }

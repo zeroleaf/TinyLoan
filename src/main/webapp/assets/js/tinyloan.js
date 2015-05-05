@@ -5,11 +5,28 @@ angular.module('tinyloan', ['ui.bootstrap'])
 
     .controller('TyModalCtrl', ['$scope', '$modal', function ($scope, $modal) {
         var balance = jQuery('#balance').text();
+
         $scope.openRechargeModal = function (size) {
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: '/templates/recharge.html',
                 controller: 'RechargeCtrl',
+                size: size,
+                resolve: {
+                    opts: function () {
+                        return {
+                            balance: balance
+                        }
+                    }
+                }
+            });
+        };
+
+        $scope.openAdvanceModal = function (size) {
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: '/templates/modalAdvance.html',
+                controller: 'AdvanceCtrl',
                 size: size,
                 resolve: {
                     opts: function () {
@@ -50,5 +67,38 @@ angular.module('tinyloan', ['ui.bootstrap'])
                 window.location.href = window.location.href.replace(/\?.*/g, '') + "?refresh=true";
             });
         }
-    }]);
+    }])
+
+    .controller('AdvanceCtrl', ['$scope', '$modalInstance', 'opts', function ($scope, $modalInstance, opts) {
+
+        $scope.balance = opts.balance;
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+
+        $scope.advance = function () {
+
+            var _modalError = jQuery('#modal-error');
+            var amount = parseFloat($scope.amount);
+            if (isNaN(amount) || amount < 0) {
+                _modalError.text('请正确输入提现金额');
+                return;
+            }
+            if (amount > $scope.balance) {
+                _modalError.text('您的提现金额超出您的余额, 请重新输入!');
+                return;
+            }
+
+            if ($scope.credit === undefined) {
+                _modalError.text('请输入正确的提现银行卡号');
+                return;
+            }
+
+            jQuery.post('/rest/asset/advance', { amount: amount, credit: $scope.credit }, function () {
+                $scope.cancel();
+                window.location.href = window.location.href.replace(/\?.*/g, '') + "?refresh=true";
+            });
+        }
+    }])
 

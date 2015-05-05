@@ -4,7 +4,7 @@
 // JQuery 不使用 $ 作为前缀.
 $.noConflict();
 
-var invest = angular.module('invest', ['ui.bootstrap']);
+var invest = angular.module('invest', ['ui.bootstrap', 'tinyloan']);
 
 invest.controller('NavigationCtrl', ['$scope', function ($scope) {
 

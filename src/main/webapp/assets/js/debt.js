@@ -1,7 +1,7 @@
 
 "use strict";
 
-var debt = angular.module('debt', ['ui.bootstrap']);
+var debt = angular.module('debt', ['ui.bootstrap', 'tinyloan']);
 
 debt.controller('NavigationCtrl', function ($scope) {
 

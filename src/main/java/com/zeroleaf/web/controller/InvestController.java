@@ -46,7 +46,16 @@ public class InvestController {
     }
 
     @RequestMapping(value = "amount", method = RequestMethod.GET)
-    public String amount() {
+    public String amount(@RequestParam(required = false) String refresh,
+                         HttpSession session,
+                         ModelMap map) {
+
+        User user = (User) session.getAttribute("user");
+        if (refresh != null) {
+            user = userService.findByNick(user.getNick());
+        }
+        map.addAttribute("user", user);
+
         return "invest/amount";
     }
 

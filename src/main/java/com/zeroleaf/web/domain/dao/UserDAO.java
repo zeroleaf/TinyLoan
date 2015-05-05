@@ -16,6 +16,8 @@ public interface UserDAO {
 
     User merge(User user);
 
+    User findById(Long id);
+
     /**
      * 通过 用户名 查找该用户.
      *

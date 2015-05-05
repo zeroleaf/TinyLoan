@@ -17,3 +17,31 @@
     border: 1px solid #b0b0b0;
     border-radius: 4px;
 }
+
+.modal-error {
+    color: #b92c28;
+}
+
+
+.line-item .content p {
+    display: inline-block;
+}
+
+.content {
+    font-size: 1.4em;
+}
+
+.content .desc {
+    font-weight: bold;
+}
+
+.content .value {
+    width: auto;
+    min-width: 70px;
+    margin: 0 20px;
+    text-align: right;
+}
+
+.content .unit {
+    color: #808080;
+}

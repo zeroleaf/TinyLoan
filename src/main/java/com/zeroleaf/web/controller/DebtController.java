@@ -27,10 +27,13 @@ public class DebtController {
     private UserService userService;
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
-    public String index(HttpSession session,
-                        ModelMap map) {
+    public String index(@RequestParam(required = false) String refresh,
+                        HttpSession session, ModelMap map) {
 
         User user = (User) session.getAttribute("user");
+        if (refresh != null) {
+            user = userService.findByNick(user.getNick());
+        }
         List<LoanApplicationForm> lafs = userService.getLoanApplicationForms(user.getNick(), 5);
 
         map.addAttribute("user", user);

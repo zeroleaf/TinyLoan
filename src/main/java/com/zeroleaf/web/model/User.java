@@ -193,6 +193,11 @@ public class User implements Serializable {
         }
     }
 
+    public void recharge(Double charge, String type) {
+        increaseBalance(charge);
+        addAmountFlow(AmountFlow.newRecharge(charge, type));
+    }
+
     /**
      * 用户借款(资金增加).
      *

@@ -41,3 +41,9 @@
 .info-center-block h2 {
     margin: 20px 20px;
 }
+
+
+.asset {
+    width: 50%;
+    margin: 0 auto;
+}

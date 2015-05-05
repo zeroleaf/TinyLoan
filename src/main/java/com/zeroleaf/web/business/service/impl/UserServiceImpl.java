@@ -77,4 +77,10 @@ public class UserServiceImpl implements UserService {
     public User findByNick(String nick) {
         return userDAO.findByNick(nick);
     }
+
+    @Override
+    public void recharge(User user, Double charge, String type) {
+        User dbUser = userDAO.findById(user.getId());
+        dbUser.recharge(charge, type);
+    }
 }

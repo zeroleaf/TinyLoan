@@ -34,6 +34,11 @@ public class HibernateUserDAO implements UserDAO {
     }
 
     @Override
+    public User findById(Long id) {
+        return (User) sessionFactory.getCurrentSession().get(User.class, id);
+    }
+
+    @Override
     public User findByNick(String nick) {
         final String hql = "FROM User WHERE nick = :nick";
         return (User) sessionFactory.getCurrentSession().createQuery(hql)

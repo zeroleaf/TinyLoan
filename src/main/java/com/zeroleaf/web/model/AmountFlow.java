@@ -13,10 +13,16 @@ import java.util.Date;
 @Table(name = "amount_flow")
 public class AmountFlow implements Serializable {
 
+    // 交易类型.
     public static final int RECHARGE = 1;   // 充值
     public static final int ADVANCE  = 2;   // 提现
     public static final int INVEST   = 3;   // 投资
     public static final int DEBT     = 4;   // 借款
+
+    // 充值方式.
+    public static final String ZFB   = "支付宝";
+    public static final String CFT   = "财付通";
+    public static final String WY    = "网银";
 
     private static final long serialVersionUID = 5946341026773608351L;
 
@@ -65,6 +71,19 @@ public class AmountFlow implements Serializable {
 
     public static AmountFlow newDebt(double amount) {
         return new AmountFlow(DEBT, amount, "借款");
+    }
+
+    public static AmountFlow newRecharge(double amount, String type) {
+        String tradeContent;
+        switch (type) {
+            case "CFT":
+                tradeContent = CFT; break;
+            case "WY":
+                tradeContent = WY;  break;
+            default:
+                tradeContent = ZFB;
+        }
+        return new AmountFlow(RECHARGE, amount, tradeContent);
     }
 
     public Long getId() {

@@ -49,21 +49,20 @@ public class LoanApplicationFormServiceImpl implements LoanApplicationFormServic
 
     @Override
     public void newInvest(User investor, Long id, Integer quantity) {
-        // TODO 增加资金流信息.
         LoanApplicationForm laf = loanApplicationFormDAO.findById(id);
         if (laf != null) {
             LoanTrade trade = LoanTrade.newTrade(investor, quantity);
             laf.addLoanTrade(trade);
 
-            investor.decreaseBalance(trade.getBalance());   // 投资者减少资金.
-            userDAO.update(investor);
+            investor = userDAO.merge(investor);
+            investor.invest(trade.getBalance());            // 投资者减少资金.
 
             User admin = userDAO.findByNick("admin");       // 平台增加相应资金.
             admin.increaseBalance(trade.getBalance());
 
             if (laf.isDone()) {
-                laf.getUser().increaseBalance(laf.getBalance());    // 借贷者增加借贷金额.
-                admin.decreaseBalance(laf.getBalance());            // 平台减少借贷金额.
+                laf.getUser().debt(laf.getBalance());       // 借贷者增加借贷金额.
+                admin.decreaseBalance(laf.getBalance());    // 平台减少借贷金额.
             }
         }
     }

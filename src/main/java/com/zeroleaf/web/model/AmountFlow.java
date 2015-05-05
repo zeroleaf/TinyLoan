@@ -15,6 +15,8 @@ public class AmountFlow implements Serializable {
 
     public static final int RECHARGE = 1;   // 充值
     public static final int ADVANCE  = 2;   // 提现
+    public static final int INVEST   = 3;   // 投资
+    public static final int DEBT     = 4;   // 借款
 
     private static final long serialVersionUID = 5946341026773608351L;
 
@@ -44,6 +46,26 @@ public class AmountFlow implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
+
+    public AmountFlow() {
+    }
+
+    public AmountFlow(Integer type, Double amount, String tradeContent) {
+        this.type           = type;
+        this.amount         = amount;
+        this.tradeContent   = tradeContent;
+
+        this.time           = new Date(System.currentTimeMillis());
+        this.code           = LoanApplicationForm.generateCode();
+    }
+
+    public static AmountFlow newInvest(double amount) {
+        return new AmountFlow(INVEST, amount, "投资");
+    }
+
+    public static AmountFlow newDebt(double amount) {
+        return new AmountFlow(DEBT, amount, "借款");
+    }
 
     public Long getId() {
         return id;

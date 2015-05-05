@@ -14,6 +14,8 @@ public interface UserDAO {
 
     void update(User user);
 
+    User merge(User user);
+
     /**
      * 通过 用户名 查找该用户.
      *

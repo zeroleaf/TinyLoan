@@ -56,7 +56,7 @@ public class User implements Serializable {
     @OneToOne(mappedBy =  "user", cascade = CascadeType.ALL)
     private Asset asset;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<AmountFlow> amountFlows = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -182,12 +182,44 @@ public class User implements Serializable {
     //----------------------------------------------------------------------
 
     /**
+     * 该用户添加资金流动记录.
+     *
+     * @param flow 资金流记录.
+     */
+    public void addAmountFlow(AmountFlow flow) {
+        if (flow != null) {
+            amountFlows.add(flow);
+            flow.setUser(this);
+        }
+    }
+
+    /**
+     * 用户借款(资金增加).
+     *
+     * @param balance 借款金额.
+     */
+    public void debt(double balance) {
+        increaseBalance(balance);
+        addAmountFlow(AmountFlow.newDebt(balance));
+    }
+
+    /**
      * 增加账户余额.
      *
      * @param balance 新增资金.
      */
     public void increaseBalance(double balance) {
         asset.setBalance(asset.getBalance() + balance);
+    }
+
+    /**
+     * 用户投资.
+     *
+     * @param balance 投资金额.
+     */
+    public void invest(double balance) {
+        decreaseBalance(balance);
+        addAmountFlow(AmountFlow.newInvest(balance));
     }
 
     /**

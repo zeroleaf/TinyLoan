@@ -112,7 +112,7 @@ public class LoanApplicationForm implements Serializable {
         }
     }
 
-    private static String generateCode() {
+    static String generateCode() {
         Random random = new Random();
         return String.format("%d%06d", System.currentTimeMillis(), random.nextInt(1000000));
     }

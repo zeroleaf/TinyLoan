@@ -32,6 +32,8 @@ public interface UserService {
 
     List<LoanApplicationForm> getLoanApplicationForms(String nick, int limit);
 
+    List<LoanApplicationForm> getRefundForms(User user, int limit);
+
     User findByNick(String nick);
 
     /**

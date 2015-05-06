@@ -54,4 +54,13 @@ public class HibernateUserDAO implements UserDAO {
                 .setMaxResults(limit)
                 .list();
     }
+
+    @Override @SuppressWarnings("unchecked")
+    public List<LoanApplicationForm> getRefund(Long userId, int limit) {
+        final String hql = "FROM LoanApplicationForm WHERE user.id = :userId AND raiseQuantity >= quantity ORDER BY id DESC";
+        return (List<LoanApplicationForm>) sessionFactory.getCurrentSession().createQuery(hql)
+                .setLong("userId", userId)
+                .setMaxResults(limit)
+                .list();
+    }
 }

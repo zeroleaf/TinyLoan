@@ -74,6 +74,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<LoanApplicationForm> getRefundForms(User user, int limit) {
+        return userDAO.getRefund(user.getId(), limit);
+    }
+
+    @Override
     public User findByNick(String nick) {
         return userDAO.findByNick(nick);
     }

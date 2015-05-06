@@ -68,12 +68,12 @@ public class AmountFlow implements Serializable {
         this.code           = LoanApplicationForm.generateCode();
     }
 
-    public static AmountFlow newInvest(double amount) {
-        return new AmountFlow(INVEST, amount, "投资");
+    public static AmountFlow newInvest(double amount, String title) {
+        return new AmountFlow(INVEST, amount, "投资项目 " + title);
     }
 
-    public static AmountFlow newDebt(double amount) {
-        return new AmountFlow(DEBT, amount, "借款");
+    public static AmountFlow newDebt(double amount, String title) {
+        return new AmountFlow(DEBT, amount, "借款申请 " + title + " 筹集金额");
     }
 
     public static AmountFlow newRecharge(double amount, String type) {
@@ -86,7 +86,7 @@ public class AmountFlow implements Serializable {
             default:
                 tradeContent = ZFB;
         }
-        tradeContent = "充值, 付款方式为" + tradeContent;
+        tradeContent += " 充值";
         return new AmountFlow(RECHARGE, amount, tradeContent);
     }
 

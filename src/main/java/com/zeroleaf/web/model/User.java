@@ -221,9 +221,9 @@ public class User implements Serializable {
      *
      * @param balance 借款金额.
      */
-    public void debt(double balance) {
+    public void debt(double balance, String title) {
         increaseBalance(balance);
-        addAmountFlow(AmountFlow.newDebt(balance));
+        addAmountFlow(AmountFlow.newDebt(balance, title));
     }
 
     /**
@@ -240,9 +240,9 @@ public class User implements Serializable {
      *
      * @param balance 投资金额.
      */
-    public void invest(double balance) {
+    public void invest(double balance, String title) {
         decreaseBalance(balance);
-        addAmountFlow(AmountFlow.newInvest(balance));
+        addAmountFlow(AmountFlow.newInvest(balance, title));
     }
 
     /**

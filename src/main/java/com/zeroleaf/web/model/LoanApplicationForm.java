@@ -2,8 +2,10 @@ package com.zeroleaf.web.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 /**
@@ -80,6 +82,9 @@ public class LoanApplicationForm implements Serializable {
     @Column(name = "refund", precision = 20, scale = 2)
     private Double refund;
 
+    @Column(name = "is_refunded")
+    private Boolean isRefunded;
+
     // TODO 由于该值是通过业务规则计算而来, 所以没必要存该值.
     // 年利率
     @Column(name = "apr", precision = 5, scale = 4)
@@ -94,11 +99,12 @@ public class LoanApplicationForm implements Serializable {
         this.pledge   = pledge;
         this.deadline = deadline;
 
-        this.price  = 1000.00;
-        this.date   = new Date(System.currentTimeMillis());
-        this.status = UNAUDITED;
-        this.apr    = judgeApr(deadline);
-        this.code   = generateCode();
+        this.price      = 1000.00;
+        this.date       = new Date(System.currentTimeMillis());
+        this.status     = UNAUDITED;
+        this.apr        = judgeApr(deadline);
+        this.code       = generateCode();
+        this.isRefunded = false;
     }
 
     private static Double judgeApr(Integer deadline) {
@@ -220,6 +226,14 @@ public class LoanApplicationForm implements Serializable {
         this.refund = refund;
     }
 
+    public Boolean getIsRefunded() {
+        return isRefunded;
+    }
+
+    public void setIsRefunded(Boolean isRefunded) {
+        this.isRefunded = isRefunded;
+    }
+
     public Double getApr() {
         return apr;
     }
@@ -255,6 +269,39 @@ public class LoanApplicationForm implements Serializable {
     //----------------------------------------------------------------------
     // 业务规则方法.
     //----------------------------------------------------------------------
+
+    public String getIsRefundString() {
+        return isRefunded ? "已回款" : "未回款";
+    }
+
+    /**
+     * 单份收益.
+     *
+     * @return
+     */
+    public double getSingleProfit() {
+        return price * apr * deadline / 12;
+    }
+
+    /**
+     * 回款金额.
+     *
+     * @return
+     */
+    public double getRefundBalance() {
+        return (price + getSingleProfit()) * quantity;
+    }
+
+    /**
+     * 还款日期.
+     *
+     * @return
+     */
+    public String getRefundDate() {
+        Date refundDate = new Date(date.getTime());
+        refundDate.setMonth(refundDate.getMonth() + deadline);
+        return DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.CHINA).format(refundDate);
+    }
 
     /**
      * 获取该借款总金额.

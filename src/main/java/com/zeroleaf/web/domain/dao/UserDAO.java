@@ -30,4 +30,6 @@ public interface UserDAO {
 
     List<LoanApplicationForm> getLoanApplicationForms(String nick, int limit);
 
+    List<LoanApplicationForm> getRefund(Long id, int limit);
+
 }

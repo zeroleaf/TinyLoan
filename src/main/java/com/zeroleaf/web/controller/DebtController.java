@@ -35,9 +35,12 @@ public class DebtController {
             user = userService.findByNick(user.getNick());
             session.setAttribute("user", user);
         }
+
+        List<LoanApplicationForm> refs = userService.getRefundForms(user, 5);
         List<LoanApplicationForm> lafs = userService.getLoanApplicationForms(user.getNick(), 5);
 
         map.addAttribute("user", user);
+        map.addAttribute("refs", refs);
         map.addAttribute("lafs", lafs);
 
         return "debt/index";

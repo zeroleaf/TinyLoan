@@ -65,11 +65,6 @@ public class InvestController {
         return "invest/refund";
     }
 
-    @RequestMapping(value = "/modal_invest", method = RequestMethod.GET)
-    public String modalInvest() {
-        return "invest/_modal_invest";
-    }
-
     @RequestMapping(value = "/action", method = RequestMethod.POST)
     @ResponseBody
     public String action(@RequestParam Long id,
@@ -78,7 +73,8 @@ public class InvestController {
 
         User user = (User) session.getAttribute("user");
         loanApplicationFormService.newInvest(user, id, quantity);
-
+        user = userService.findByNick(user.getNick());
+        session.setAttribute("user", user);
         return "";
     }
 

@@ -31,82 +31,48 @@
                         </div>
                         <div class="row line-item">
                             <div class="content col-sm-6">
-                                <p class="desc">累计收益</p>
+                                <p class="desc">待还金额</p>
                                 <p class="value">0.00</p>
                                 <p class="unit">元</p>
                             </div>
                         </div>
                         <div class="row line-item">
                             <div class="content col-sm-6">
-                                <p class="desc">总投资额</p>
+                                <p class="desc">累计借款</p>
                                 <p class="value">0.00</p>
                                 <p class="unit">元</p>
                             </div>
                         </div>
                     </div>
-                    <!--<div class="row">-->
-                        <!--<div class="col-sm-offset-3 col-sm-6">-->
-                            <!--<div class="item">-->
-                                <!--<label>账户余额</label>-->
-                                <!--<span th:text="${user.asset.balance}"></span>-->
-                                <!--<p>元</p>-->
-                                <!--<div class="operation">-->
-                                    <!--<button class="btn btn-primary" data-toggle="modal" data-target="#recharge">充值</button>-->
-                                    <!--<button class="btn btn-primary" data-toggle="modal" data-target="#advance">提现</button>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="row">-->
-                        <!--<div class="col-sm-offset-3 col-sm-6">-->
-                            <!--<div class="item">-->
-                                <!--<label>待还金额</label>-->
-                                <!--<p>元</p>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="row">-->
-                        <!--<div class="col-sm-offset-3 col-sm-6">-->
-                            <!--<div class="item">-->
-                                <!--<label>累计借款</label>-->
-                                <!--<p>元</p>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
                 </div>
 
                 <div class="m-t-lg">
                     <div class="row">
                         <div class="col-sm-offset-1 col-sm-4 animated slideInLeft">
                             <div class="repayment">
-                                <h2>还款列表</h2>
-                                <div>
-                                    <table class="table table-hover">
-                                        <tr>
-                                            <th>#</th>
-                                            <th>日期</th>
-                                            <th>金额</th>
-                                            <th>还款状态</th>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>xx</td>
-                                            <td>xx</td>
-                                            <td>xx</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>xx</td>
-                                            <td>xx</td>
-                                            <td>xx</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>xx</td>
-                                            <td>xx</td>
-                                            <td>xx</td>
-                                        </tr>
-                                    </table>
+                                <h2>回款列表</h2>
+                                <div class="">
+                                    <div th:if="${refs.isEmpty()}">
+                                        <p>您当前没有待回款项目.</p>
+                                    </div>
+                                    <div th:unless="${refs.isEmpty()}">
+                                        <table class="table table-hover">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>项目</th>
+                                                <th>日期</th>
+                                                <th>金额</th>
+                                                <th>状态</th>
+                                            </tr>
+                                            <tr th:each="ref,status : ${refs}">
+                                                <td th:text="${status.count}"></td>
+                                                <td th:text="${ref.title}"></td>
+                                                <td th:text="${ref.refundDate}"></td>
+                                                <td th:text="${ref.refundBalance}"></td>
+                                                <td th:text="${ref.isRefundString}"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>

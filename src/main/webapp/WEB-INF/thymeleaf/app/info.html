@@ -11,6 +11,7 @@
     <body>
 
         <div th:include="debt/_nav::navigation" th:if="${user.type == 1}"></div>
+        <div th:include="invest/_nav::navigation" th:if="${user.type == 2}"></div>
 
         <section id="info">
             <div class="container">
@@ -58,6 +59,7 @@
                                 <div class="col-sm-offset-3 col-sm-8">
                                     <button type="submit" class="btn btn-primary">确认修改</button>
                                     <a href="/debt/index" class="btn btn-default" th:if="${user.type == 1}">返回</a>
+                                    <a href="/invest/index" class="btn btn-default" th:if="${user.type == 2}">返回</a>
                                 </div>
                             </div>
                         </form>

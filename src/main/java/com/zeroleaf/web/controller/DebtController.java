@@ -76,6 +76,6 @@ public class DebtController {
 
     @RequestMapping(value = "record", method = RequestMethod.GET)
     public String record() {
-        return "debt/record";
+        return "app/record";
     }
 }

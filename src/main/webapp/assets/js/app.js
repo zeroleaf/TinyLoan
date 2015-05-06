@@ -1,7 +1,7 @@
 
 "use strict";
 
-var myApp = angular.module('myApp', ['ngAnimate', 'toastr', 'ui.bootstrap']);
+var myApp = angular.module('myApp', ['ngAnimate', 'toastr', 'ui.bootstrap', 'tinyloan']);
 
 myApp.controller('RegisterCtrl', function ($scope) {
     $scope.fields = [
@@ -14,7 +14,7 @@ myApp.controller('RegisterCtrl', function ($scope) {
 myApp.controller('PasswordCtrl', ['$scope', 'toastr', function ($scope, toastr) {
     $scope.fields = [
         { identify: 'old_password', label: '旧密码' },
-        { identify: 'password',     label: '新密码', },
+        { identify: 'password',     label: '新密码' },
         { identify: 'confirm',      label: '确认密码'}
     ];
 

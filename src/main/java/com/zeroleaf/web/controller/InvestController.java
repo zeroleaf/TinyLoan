@@ -81,4 +81,9 @@ public class InvestController {
 
         return "";
     }
+
+    @RequestMapping(value = "record", method = RequestMethod.GET)
+    public String record() {
+        return "app/record";
+    }
 }

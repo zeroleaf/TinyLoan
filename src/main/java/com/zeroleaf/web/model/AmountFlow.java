@@ -1,5 +1,7 @@
 package com.zeroleaf.web.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -11,6 +13,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "amount_flow")
+@JsonIgnoreProperties(value = {"user"}, ignoreUnknown = true)
 public class AmountFlow implements Serializable {
 
     // 交易类型.

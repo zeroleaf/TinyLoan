@@ -86,6 +86,7 @@ public class AmountFlow implements Serializable {
             default:
                 tradeContent = ZFB;
         }
+        tradeContent = "充值, 付款方式为" + tradeContent;
         return new AmountFlow(RECHARGE, amount, tradeContent);
     }
 

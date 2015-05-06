@@ -9,7 +9,7 @@ angular.module('tinyloan', ['ui.bootstrap'])
         $scope.openRechargeModal = function (size) {
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: '/templates/recharge.html',
+                templateUrl: '/templates/modalRecharge.html',
                 controller: 'RechargeCtrl',
                 size: size,
                 resolve: {
@@ -48,7 +48,10 @@ angular.module('tinyloan', ['ui.bootstrap'])
             { name: '财付通', value: 'CFT' },
             { name: '网银',   value: 'WY'  }
         ];
-        $scope.pay = $scope.payMethods[0].value;
+        //PUZZLE 为什么一定要这样, 直接 pay 不行
+        $scope.pay = {
+            method: $scope.payMethods[0].value
+        };
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
@@ -61,7 +64,7 @@ angular.module('tinyloan', ['ui.bootstrap'])
                 return;
             }
 
-            jQuery.post('/rest/asset/recharge', { charge: $scope.charge, pay: $scope.pay }, function () {
+            jQuery.post('/rest/asset/recharge', { charge: $scope.charge, pay: $scope.pay.method }, function () {
                 $scope.cancel();
                 //刷新该网页, 重新载入数据
                 window.location.href = window.location.href.replace(/\?.*/g, '') + "?refresh=true";

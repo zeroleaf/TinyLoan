@@ -44,6 +44,8 @@ public class RestController {
                          @RequestParam String pay,
                          HttpSession session) {
 
+        System.out.println(pay);
+
         User user = (User) session.getAttribute("user");
         userService.recharge(user, charge, pay);
     }

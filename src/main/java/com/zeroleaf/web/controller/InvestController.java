@@ -62,9 +62,14 @@ public class InvestController {
         }
 
         InvestAnalysis analysis = loanTradeService.getInvestAnalysis(user);
+        double totalProfit = loanTradeService.getTotalInvestProfit(user);
+        double totalAmount = loanTradeService.getTotalInvestAmount(user);
+
 
         map.addAttribute("user",     user);
         map.addAttribute("analysis", analysis);
+        map.addAttribute("totalProfit", totalProfit);
+        map.addAttribute("totalAmount", totalAmount);
 
         return "invest/amount";
     }

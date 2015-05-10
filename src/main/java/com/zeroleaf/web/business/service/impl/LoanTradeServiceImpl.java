@@ -54,4 +54,27 @@ public class LoanTradeServiceImpl implements LoanTradeService {
 
         return analysis;
     }
+
+    @Override
+    public double getTotalInvestProfit(User investor) {
+        double totalProfit = 0;
+        List<LoanTrade> trades = loanTradeDAO.getLoanTrade(investor, 0, Integer.MAX_VALUE);
+        for (LoanTrade trade : trades) {
+            LoanApplicationForm laf = trade.getForm();
+            if (laf.getIsRefunded()) {
+                totalProfit += laf.getSingleProfit() * trade.getQuantity();
+            }
+        }
+        return totalProfit;
+    }
+
+    @Override
+    public double getTotalInvestAmount(User investor) {
+        double totalAmount = 0;
+        List<LoanTrade> trades = loanTradeDAO.getLoanTrade(investor, 0, Integer.MAX_VALUE);
+        for (LoanTrade trade : trades) {
+            totalAmount += trade.getBalance();
+        }
+        return totalAmount;
+    }
 }

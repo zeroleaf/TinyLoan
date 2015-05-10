@@ -18,5 +18,21 @@ public interface LoanTradeService {
      */
     Page<InvestRecord> getInvestRecord(User investor, int page);
 
+    /**
+     * 投资结构分析.
+     *
+     * @param investor 投资者.
+     * @return
+     */
     InvestAnalysis getInvestAnalysis(User investor);
+
+    /**
+     * 累计收益.
+     *
+     * @param investor 投资者.
+     * @return
+     */
+    double getTotalInvestProfit(User investor);
+
+    double getTotalInvestAmount(User investor);
 }

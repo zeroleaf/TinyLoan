@@ -2,6 +2,7 @@ package com.zeroleaf.web.business.service.impl;
 
 import com.zeroleaf.web.business.service.LoginResult;
 import com.zeroleaf.web.business.service.UserService;
+import com.zeroleaf.web.business.service.dto.InvestAnalysis;
 import com.zeroleaf.web.domain.dao.UserDAO;
 import com.zeroleaf.web.model.Asset;
 import com.zeroleaf.web.model.LoanApplicationForm;

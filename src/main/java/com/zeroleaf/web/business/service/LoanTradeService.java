@@ -1,5 +1,6 @@
 package com.zeroleaf.web.business.service;
 
+import com.zeroleaf.web.business.service.dto.InvestAnalysis;
 import com.zeroleaf.web.business.service.dto.InvestRecord;
 import com.zeroleaf.web.model.User;
 
@@ -16,4 +17,6 @@ public interface LoanTradeService {
      * @return
      */
     Page<InvestRecord> getInvestRecord(User investor, int page);
+
+    InvestAnalysis getInvestAnalysis(User investor);
 }

@@ -1,5 +1,6 @@
 package com.zeroleaf.web.business.service;
 
+import com.zeroleaf.web.business.service.dto.InvestAnalysis;
 import com.zeroleaf.web.business.service.dto.InvestRecord;
 import com.zeroleaf.web.model.LoanApplicationForm;
 import com.zeroleaf.web.model.User;

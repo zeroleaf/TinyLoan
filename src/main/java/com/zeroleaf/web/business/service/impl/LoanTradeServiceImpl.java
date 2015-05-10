@@ -2,6 +2,7 @@ package com.zeroleaf.web.business.service.impl;
 
 import com.zeroleaf.web.business.service.LoanTradeService;
 import com.zeroleaf.web.business.service.Page;
+import com.zeroleaf.web.business.service.dto.InvestAnalysis;
 import com.zeroleaf.web.business.service.dto.InvestRecord;
 import com.zeroleaf.web.domain.dao.LoanTradeDAO;
 import com.zeroleaf.web.model.LoanApplicationForm;
@@ -38,5 +39,19 @@ public class LoanTradeServiceImpl implements LoanTradeService {
         }
 
         return r;
+    }
+
+    @Override
+    public InvestAnalysis getInvestAnalysis(User investor) {
+
+        InvestAnalysis analysis = new InvestAnalysis();
+
+        List<LoanTrade> trades = loanTradeDAO.getLoanTrade(investor, 0, Integer.MAX_VALUE);
+        for (LoanTrade trade : trades) {
+            LoanApplicationForm laf = trade.getForm();
+            analysis.tickKey(laf.getDeadline());
+        }
+
+        return analysis;
     }
 }

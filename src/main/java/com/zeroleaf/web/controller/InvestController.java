@@ -1,8 +1,9 @@
 package com.zeroleaf.web.controller;
 
 import com.zeroleaf.web.business.service.LoanApplicationFormService;
-import com.zeroleaf.web.business.service.Page;
+import com.zeroleaf.web.business.service.LoanTradeService;
 import com.zeroleaf.web.business.service.UserService;
+import com.zeroleaf.web.business.service.dto.InvestAnalysis;
 import com.zeroleaf.web.model.LoanApplicationForm;
 import com.zeroleaf.web.model.User;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,9 @@ public class InvestController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private LoanTradeService loanTradeService;
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public String index(@RequestParam(defaultValue = "1") int page,
@@ -56,7 +60,11 @@ public class InvestController {
             user = userService.findByNick(user.getNick());
             session.setAttribute("user", user);
         }
-        map.addAttribute("user", user);
+
+        InvestAnalysis analysis = loanTradeService.getInvestAnalysis(user);
+
+        map.addAttribute("user",     user);
+        map.addAttribute("analysis", analysis);
 
         return "invest/amount";
     }

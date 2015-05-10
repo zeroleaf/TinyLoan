@@ -1,9 +1,7 @@
 package com.zeroleaf.web.controller;
 
-import com.zeroleaf.web.business.service.AmountFlowService;
-import com.zeroleaf.web.business.service.LoanApplicationFormService;
-import com.zeroleaf.web.business.service.Page;
-import com.zeroleaf.web.business.service.UserService;
+import com.zeroleaf.web.business.service.*;
+import com.zeroleaf.web.business.service.dto.InvestRecord;
 import com.zeroleaf.web.model.AmountFlow;
 import com.zeroleaf.web.model.User;
 import com.zeroleaf.web.util.JSONUtils;
@@ -28,6 +26,9 @@ public class RestController {
 
     @Resource
     private AmountFlowService amountFlowService;
+
+    @Resource
+    private LoanTradeService loanTradeService;
 
 //    TODO Point - 如何更好的接收 $http.post() 的参数?
     @RequestMapping(value = "/laf/status", method = RequestMethod.POST)
@@ -61,7 +62,7 @@ public class RestController {
     }
 
     @RequestMapping(value = "/user/afs", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
-    @ResponseBody()
+    @ResponseBody
     public String getUserAmountFlows(@RequestParam Integer page,
                                      HttpSession session) {
 
@@ -69,5 +70,29 @@ public class RestController {
         Page<AmountFlow> afs = amountFlowService.getPage(user, page);
 
         return JSONUtils.toJson(afs);
+    }
+
+    @RequestMapping(value = "/investor/profit", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+    @ResponseBody
+    public String getInvestorProfit(@RequestParam Integer page,
+                                    HttpSession session) {
+
+        User user = (User) session.getAttribute("user");
+        Page<AmountFlow> profits = amountFlowService.getProfit(user, page);
+
+        return JSONUtils.toJson(profits);
+    }
+
+    @RequestMapping(value = "/investor/my_investment",
+            method = {RequestMethod.GET, RequestMethod.POST},
+            produces = "text/plain;charset=UTF-8")
+    @ResponseBody
+    public String getInvestorRecord(@RequestParam Integer page,
+                                    HttpSession session) {
+
+        User user = (User) session.getAttribute("user");
+        Page<InvestRecord> iRecord = loanTradeService.getInvestRecord(user, page);
+
+        return JSONUtils.toJson(iRecord);
     }
 }

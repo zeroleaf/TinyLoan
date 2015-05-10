@@ -11,6 +11,8 @@ public interface AmountFlowDAO {
 
     List<AmountFlow> getRange(long userId, int pos, int limit);
 
+    List<AmountFlow> getProfitRange(long userId, int pos, int limit);
+
     long count(long userId);
 
 }

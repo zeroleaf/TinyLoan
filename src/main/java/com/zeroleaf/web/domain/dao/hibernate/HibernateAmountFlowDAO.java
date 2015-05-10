@@ -27,6 +27,16 @@ public class HibernateAmountFlowDAO implements AmountFlowDAO {
                 .list();
     }
 
+    @Override @SuppressWarnings("unchecked")
+    public List<AmountFlow> getProfitRange(long userId, int pos, int limit) {
+        final String hql = "FROM AmountFlow WHERE user.id = :userId AND type = 6 ORDER BY time DESC";
+        return (List<AmountFlow>) sessionFactory.getCurrentSession().createQuery(hql)
+                .setLong("userId", userId)
+                .setFirstResult(pos)
+                .setMaxResults(limit)
+                .list();
+    }
+
     @Override
     public long count(long userId) {
         final String hql = "SELECT COUNT (*) FROM AmountFlow WHERE user.id = :userId";

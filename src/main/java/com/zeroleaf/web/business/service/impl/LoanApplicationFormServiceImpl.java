@@ -1,8 +1,12 @@
 package com.zeroleaf.web.business.service.impl;
 
 import com.zeroleaf.web.business.service.LoanApplicationFormService;
+import com.zeroleaf.web.business.service.Page;
+import com.zeroleaf.web.business.service.dto.InvestRecord;
 import com.zeroleaf.web.domain.dao.LoanApplicationFormDAO;
+import com.zeroleaf.web.domain.dao.LoanTradeDAO;
 import com.zeroleaf.web.domain.dao.UserDAO;
+import com.zeroleaf.web.model.AmountFlow;
 import com.zeroleaf.web.model.LoanApplicationForm;
 import com.zeroleaf.web.model.LoanTrade;
 import com.zeroleaf.web.model.User;
@@ -23,6 +27,9 @@ public class LoanApplicationFormServiceImpl implements LoanApplicationFormServic
 
     @Resource
     private UserDAO userDAO;
+
+    @Resource
+    private LoanTradeDAO loanTradeDAO;
 
     @Override
     public List<LoanApplicationForm> getUnaudited(int page) {

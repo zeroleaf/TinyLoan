@@ -5,6 +5,26 @@ function refresh() {
     window.location.href = window.location.href.replace(/\?.*/g, '') + "?refresh=true";
 }
 
+function formatTime (timeInMillis) {
+    if (typeof timeInMillis !== 'number') {
+        timeInMillis = parseInt(timeInMillis);
+    }
+    return new Date(timeInMillis).toLocaleString();
+}
+
+function PageCreater(d) {
+    d = d || {};
+    return {
+        totalNumber: d['totalNumber'] || 0,
+        pageSize: d['pageSize'] || 0,
+        pageNumber: d['pageNumber'] || 1,
+        content: d['content'] || [],
+        offset: function () {
+            return (this.pageNumber - 1) * this.pageSize;
+        }
+    }
+}
+
 angular.module('tinyloan', ['ui.bootstrap'])
 
     .controller('TyModalCtrl', ['$scope', '$modal', function ($scope, $modal) {
@@ -112,26 +132,13 @@ angular.module('tinyloan', ['ui.bootstrap'])
 
     .controller('AmountFlowCtrl', ['$scope', function ($scope) {
 
-        function PageCreater(d) {
-            d = d || {};
-            return {
-                totalNumber: d['totalNumber'] || 0,
-                pageSize: d['pageSize'] || 0,
-                pageNumber: d['pageNumber'] || 1,
-                content: d['content'] || [],
-                offset: function () {
-                    return (this.pageNumber - 1) * this.pageSize;
-                }
-            }
-        }
-
         $scope.page = new PageCreater();
 
         function loadAmountFlows(page) {
             jQuery.post('/rest/user/afs', { page: page }, function (data) {
                 var d = JSON.parse(data);
 
-                $scope.page = new PageCreater(d);
+                //$scope.page = new PageCreater(d);
 
                 if (d['totalNumber'] === 0) {
                     jQuery('#info').css('display', 'block');

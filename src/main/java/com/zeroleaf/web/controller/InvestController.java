@@ -1,6 +1,7 @@
 package com.zeroleaf.web.controller;
 
 import com.zeroleaf.web.business.service.LoanApplicationFormService;
+import com.zeroleaf.web.business.service.Page;
 import com.zeroleaf.web.business.service.UserService;
 import com.zeroleaf.web.model.LoanApplicationForm;
 import com.zeroleaf.web.model.User;
@@ -81,5 +82,10 @@ public class InvestController {
     @RequestMapping(value = "record", method = RequestMethod.GET)
     public String record() {
         return "app/record";
+    }
+
+    @RequestMapping(value = "/invest", method = RequestMethod.GET)
+    public String invest() {
+        return "invest/invest";
     }
 }

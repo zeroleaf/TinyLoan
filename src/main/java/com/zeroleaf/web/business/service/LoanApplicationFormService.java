@@ -1,5 +1,6 @@
 package com.zeroleaf.web.business.service;
 
+import com.zeroleaf.web.business.service.dto.InvestRecord;
 import com.zeroleaf.web.model.LoanApplicationForm;
 import com.zeroleaf.web.model.User;
 
@@ -25,4 +26,6 @@ public interface LoanApplicationFormService {
      * @param lafId  借款申请 id.
      */
     void newRefund(User debtor, Long lafId);
+
+
 }

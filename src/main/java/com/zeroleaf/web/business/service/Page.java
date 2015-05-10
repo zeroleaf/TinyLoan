@@ -56,4 +56,8 @@ public class Page<T> {
     public void addContent(Collection<T> tCollection) {
         content.addAll(tCollection);
     }
+
+    public void addContent(T t) {
+        content.add(t);
+    }
 }

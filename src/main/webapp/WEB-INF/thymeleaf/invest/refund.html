@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html ng-app="invest" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>小微贷 - 借贷</title>
+
+        <link href="/res/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+        <link href="/res/animate.css/animate.css" rel="stylesheet">
+        <link href="/assets/css/common.css" rel="stylesheet">
+        <link href="/assets/css/invest.css" rel="stylesheet">
     </head>
-    <body>
+    <body ng-controller="RefundCtrl">
 
         <div th:include="invest/_nav::navigation"></div>
 
@@ -14,44 +19,37 @@
                 <div class="info-center-block animated lightSpeedIn">
                     <div class="gray-border">
                         <h2>回款列表</h2>
-                        <div class="detail">
+                        <div id="info" class="info" style="display: none">
+                            <p>没有您当前的历史交易记录.</p>
+                        </div>
+                        <div class="detail" id="detail">
                             <table class="table table-striped table-hover">
                                 <tr>
                                     <th>#</th>
+                                    <th>标题</th>
                                     <th>时间</th>
                                     <th>金额</th>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>xx</td>
-                                    <td>xx</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>xx</td>
-                                    <td>xx</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>xx</td>
-                                    <td>xx</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>xx</td>
-                                    <td>xx</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>xx</td>
-                                    <td>xx</td>
+                                <tr ng-repeat="c in page.content">
+                                    <th>{{$index + 1 + page.offset()}}</th>
+                                    <th>{{c.tradeContent}}</th>
+                                    <th>{{formatTime(c.time)}}</th>
+                                    <th>{{c.amount}}</th>
                                 </tr>
                             </table>
+                        </div>
+                        <div>
+                            <pagination items-per-page="page.pageSize" total-items="page.totalNumber" ng-model="page.pageNumber" ng-change="pageChanged()"></pagination>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <script src="/res/jquery/dist/jquery.js"></script>
+        <script src="/res/angular/angular.min.js"></script>
+        <script src="/res/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script src="/assets/js/tinyloan.js"></script>
+        <script src="/assets/js/invest.js"></script>
     </body>
 </html>

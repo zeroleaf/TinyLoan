@@ -79,3 +79,65 @@ invest.controller('InvestModalCtrl', ['$scope', '$modalInstance', 'opts', functi
         });
     }
 }]);
+
+invest.controller('RefundCtrl', ['$scope', function ($scope) {
+
+    $scope.page = new PageCreater();
+
+    $scope.formatTime = formatTime;
+
+    function loadInvestorProfits(page) {
+        jQuery.get('/rest/investor/profit', { page: page }, function (data) {
+            var d = JSON.parse(data);
+
+            if (d['totalNumber'] === 0) {
+                jQuery('#info').css('display', 'block');
+                jQuery('#detail').css('display', 'none');
+            } else {
+                jQuery('#info').css('display', 'none');
+                jQuery('#detail').css('display', 'block');
+            }
+
+            $scope.$apply(function () {
+                $scope.page = new PageCreater(d);
+            });
+        });
+    }
+
+    $scope.pageChanged = function() {
+        loadInvestorProfits($scope.page.pageNumber);
+    };
+
+    $scope.pageChanged();
+}]);
+
+invest.controller('InvestCtrl', ['$scope', function ($scope) {
+
+    $scope.page = new PageCreater();
+
+    $scope.formatTime = formatTime;
+
+    function loadInvestorProfits(page) {
+        jQuery.get('/rest/investor/my_investment', { page: page }, function (data) {
+            var d = JSON.parse(data);
+
+            if (d['totalNumber'] === 0) {
+                jQuery('#info').css('display', 'block');
+                jQuery('#detail').css('display', 'none');
+            } else {
+                jQuery('#info').css('display', 'none');
+                jQuery('#detail').css('display', 'block');
+            }
+
+            $scope.$apply(function () {
+                $scope.page = new PageCreater(d);
+            });
+        });
+    }
+
+    $scope.pageChanged = function() {
+        loadInvestorProfits($scope.page.pageNumber);
+    };
+
+    $scope.pageChanged();
+}]);

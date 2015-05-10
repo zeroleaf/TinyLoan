@@ -10,7 +10,7 @@
         <link href="/assets/css/common.css" rel="stylesheet">
         <link href="/assets/css/debt.css" rel="stylesheet">
     </head>
-    <body>
+    <body ng-controller="IndexCtrl">
 
         <div th:include="debt/_nav::navigation"></div>
 
@@ -21,7 +21,7 @@
                         <div class="row line-item">
                             <div class="content col-sm-6">
                                 <p class="desc">账户余额</p>
-                                <p id="balance" class="value" th:text="${user.asset.balance}"></p>
+                                <p id="balance" class="value" th:value="${user.asset.balance}" th:text="${user.asset.balance}"></p>
                                 <p class="unit">元</p>
                             </div>
                             <div class="col-sm-4" ng-controller="TyModalCtrl">
@@ -63,6 +63,7 @@
                                                 <th>日期</th>
                                                 <th>金额</th>
                                                 <th>状态</th>
+                                                <th>操作</th>
                                             </tr>
                                             <tr th:each="ref,status : ${refs}">
                                                 <td th:text="${status.count}"></td>
@@ -70,6 +71,9 @@
                                                 <td th:text="${ref.refundDate}"></td>
                                                 <td th:text="${ref.refundBalance}"></td>
                                                 <td th:text="${ref.isRefundString}"></td>
+                                                <td th:unless="${ref.isRefunded}">
+                                                    <button class="btn btn-primary" th:attr="data-ref-id=${ref.id},data-refund-balance=${ref.refundBalance}" ng-click="refund($event)">还款</button>
+                                                </td>
                                             </tr>
                                         </table>
                                     </div>
@@ -105,9 +109,6 @@
                 </div>
             </div>
         </section>
-
-        <!--<div th:include="share/_recharge::recharge"></div>-->
-        <!--<div th:include="share/_advance::advance"></div>-->
 
         <script src="/res/jquery/dist/jquery.js"></script>
         <script src="/res/angular/angular.min.js"></script>

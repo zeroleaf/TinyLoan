@@ -246,6 +246,28 @@ public class User implements Serializable {
     }
 
     /**
+     * 用户回款.
+     *
+     * @param balance 回款金额.
+     * @param title   说明.
+     */
+    public void refund(double balance, String title) {
+        decreaseBalance(balance);
+        addAmountFlow(AmountFlow.newRefund(balance, title));
+    }
+
+    /**
+     * 投资者回款获利.
+     *
+     * @param balance 回款金额.
+     * @param title   标题.
+     */
+    public void profit(double balance, String title) {
+        increaseBalance(balance);
+        addAmountFlow(AmountFlow.newProfit(balance, title));
+    }
+
+    /**
      * 减少账户余额.
      *
      * @param balance 减少资金.

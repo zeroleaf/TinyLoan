@@ -1,6 +1,10 @@
 
 "use strict";
 
+function refresh() {
+    window.location.href = window.location.href.replace(/\?.*/g, '') + "?refresh=true";
+}
+
 angular.module('tinyloan', ['ui.bootstrap'])
 
     .controller('TyModalCtrl', ['$scope', '$modal', function ($scope, $modal) {

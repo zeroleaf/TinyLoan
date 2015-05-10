@@ -66,4 +66,24 @@ public class LoanApplicationFormServiceImpl implements LoanApplicationFormServic
             }
         }
     }
+
+    @Override
+    public void newRefund(User debtor, Long lafId) {
+        LoanApplicationForm laf = loanApplicationFormDAO.findById(lafId);
+        if (laf != null) {
+            laf.setIsRefunded(true);        // 设置 已回款标志.
+
+            // 借款者减少金额
+            debtor = userDAO.merge(debtor);
+            debtor.refund(laf.getRefundBalance(), laf.getTitle());
+
+            // 所有投资者增加相应金额.
+            List<LoanTrade> trades = laf.getTrades();
+            for (LoanTrade trade : trades) {
+                User investor = trade.getInvestor();
+                investor.profit(trade.getProfit(), laf.getTitle());
+            }
+        }
+
+    }
 }

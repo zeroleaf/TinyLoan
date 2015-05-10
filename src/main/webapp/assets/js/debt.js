@@ -29,7 +29,7 @@ debt.controller('NavigationCtrl', function ($scope) {
 debt.controller('PasswordCtrl', function ($scope) {
     $scope.fields = [
         { identify: 'old_password', label: '旧密码' },
-        { identify: 'password',     label: '新密码', },
+        { identify: 'password',     label: '新密码' },
         { identify: 'confirm',      label: '确认密码'}
     ];
 });
@@ -43,4 +43,22 @@ debt.controller('LoanCtrl', ['$scope', function ($scope) {
     ];
 
     $scope.timeLimit = $scope.timeLimits[0];
+}]);
+
+
+debt.controller('IndexCtrl', ['$scope', function ($scope) {
+
+    $scope.refund = function ($event) {
+        var $btn = jQuery($event.target);
+        var balance = parseFloat(jQuery('#balance').text());
+        if (parseFloat($btn.data('refund-balance')) > balance) {
+            alert('您的账户余额不足, 请充值后重试');
+            return;
+        }
+
+        var refId = $btn.data('ref-id');
+        jQuery.post('/debt/refund', { refId: refId }, function () {
+            refresh();
+        });
+    }
 }]);

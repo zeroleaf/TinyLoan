@@ -21,6 +21,8 @@ public class AmountFlow implements Serializable {
     public static final int ADVANCE  = 2;   // 提现
     public static final int INVEST   = 3;   // 投资
     public static final int DEBT     = 4;   // 借款
+    public static final int REFUND   = 5;   // 借款者 回款
+    public static final int PROFIT   = 6;   // 投资者 回款到账
 
     // 充值方式.
     public static final String ZFB   = "支付宝";
@@ -93,6 +95,16 @@ public class AmountFlow implements Serializable {
     public static AmountFlow newAdvance(double amount, String credit) {
         String tradeContent = String.format("提现到银行卡 %s", credit);
         return new AmountFlow(ADVANCE, amount, tradeContent);
+    }
+
+    public static AmountFlow newRefund(double amount, String title) {
+        String tradeContent = "回款到项目 - " + title;
+        return new AmountFlow(REFUND, amount, tradeContent);
+    }
+
+    public static AmountFlow newProfit(double amount, String title) {
+        String tradeContent = title + " 项目回款";
+        return new AmountFlow(PROFIT, amount, tradeContent);
     }
 
     public Long getId() {

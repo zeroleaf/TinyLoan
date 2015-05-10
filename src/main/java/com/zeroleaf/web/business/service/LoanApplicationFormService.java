@@ -17,4 +17,12 @@ public interface LoanApplicationFormService {
     List<LoanApplicationForm> getInvestable(int page);
 
     void newInvest(User investor, Long id, Integer quantity);
+
+    /**
+     * 借款人指定借款 回款.
+     *
+     * @param debtor 借款人.
+     * @param lafId  借款申请 id.
+     */
+    void newRefund(User debtor, Long lafId);
 }

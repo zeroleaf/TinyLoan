@@ -102,4 +102,17 @@ public class LoanTrade {
 
         return quantity * form.getPrice();
     }
+
+    /**
+     * 回款时的金额.
+     *
+     * @return
+     */
+    public Double getProfit() {
+        if (form == null) {
+            throw new IllegalStateException("要获取交易金额必需先关联借款申请.");
+        }
+
+        return quantity * (form.getPrice() + form.getSingleProfit());
+    }
 }

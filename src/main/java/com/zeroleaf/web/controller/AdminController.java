@@ -2,6 +2,7 @@ package com.zeroleaf.web.controller;
 
 import com.zeroleaf.web.business.service.LoanApplicationFormService;
 import com.zeroleaf.web.business.service.UserService;
+import com.zeroleaf.web.business.service.dto.AppRecord;
 import com.zeroleaf.web.model.LoanApplicationForm;
 import com.zeroleaf.web.model.User;
 import org.springframework.stereotype.Controller;
@@ -42,7 +43,10 @@ public class AdminController {
             session.setAttribute("user", admin);
         }
 
+        List<AppRecord> aps = loanApplicationFormService.getNotRefund(5);
+
         map.addAttribute("user", admin);
+        map.addAttribute("aps",  aps);
 
         return "admin/index";
     }

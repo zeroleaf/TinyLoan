@@ -58,7 +58,10 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-8 col-sm-offset-2" id="overdue-user">
+                            <div class="col-sm-8 col-sm-offset-2" th:if="${aps.isEmpty()}">
+                                <p>没有待还款的用户.</p>
+                            </div>
+                            <div class="col-sm-8 col-sm-offset-2" id="overdue-user" th:unless="${aps.isEmpty()}">
                                 <table class="table table-hover text-center">
                                     <tr>
                                         <th>#</th>
@@ -67,39 +70,10 @@
                                         <th>到期时间</th>
                                         <th>操作</th>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>xx</td>
-                                        <td>xx</td>
-                                        <td>xx</td>
-                                        <td><button type="button" class="btn btn-primary">催款</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>xx</td>
-                                        <td>xx</td>
-                                        <td>xx</td>
-                                        <td><button type="button" class="btn btn-primary">催款</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>xx</td>
-                                        <td>xx</td>
-                                        <td>xx</td>
-                                        <td><button type="button" class="btn btn-primary disabled">催款</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>xx</td>
-                                        <td>xx</td>
-                                        <td>xx</td>
-                                        <td><button type="button" class="btn btn-primary">催款</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>xx</td>
-                                        <td>xx</td>
-                                        <td>xx</td>
+                                    <tr th:each="ap,status : ${aps}">
+                                        <td th:text="${status.count}"></td>
+                                        <td th:text="${ap.username}"></td>
+                                        <td th:text="${ap.date}"></td>
                                         <td><button type="button" class="btn btn-primary">催款</button></td>
                                     </tr>
                                 </table>

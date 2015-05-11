@@ -91,4 +91,12 @@ public class HibernateLoanApplicationFormDAO implements LoanApplicationFormDAO {
                 .setMaxResults(limit)
                 .list();
     }
+
+    @Override @SuppressWarnings("unchecked")
+    public List<LoanApplicationForm> getNotRefund(int limit) {
+        final String hql = "FROM LoanApplicationForm laf WHERE status = 2 AND raiseQuantity >= quantity AND isRefunded = false ORDER BY date DESC";
+        return (List<LoanApplicationForm>) sessionFactory.getCurrentSession().createQuery(hql)
+                .setMaxResults(limit)
+                .list();
+    }
 }

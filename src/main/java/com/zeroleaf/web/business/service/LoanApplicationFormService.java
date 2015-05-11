@@ -46,5 +46,5 @@ public interface LoanApplicationFormService {
 
     Page<AppRecord> lafs(Integer page);
 
-//    List<AppRecord> getNotRefund(int limit);
+    List<AppRecord> getNotRefund(int limit);
 }

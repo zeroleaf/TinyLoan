@@ -27,4 +27,6 @@ public interface LoanApplicationFormDAO {
     long count();
 
     List<LoanApplicationForm> getLafs(int pos, int limit);
+
+    List<LoanApplicationForm> getNotRefund(int limit);
 }

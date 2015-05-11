@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -129,5 +130,17 @@ public class LoanApplicationFormServiceImpl implements LoanApplicationFormServic
             p.addContent(record);
         }
         return p;
+    }
+
+    @Override
+    public List<AppRecord> getNotRefund(int limit) {
+        List<AppRecord> list = new ArrayList<>();
+        List<LoanApplicationForm> lafs = loanApplicationFormDAO.getNotRefund(limit);
+        for (LoanApplicationForm laf : lafs) {
+            AppRecord record = new AppRecord(laf.getCode(), laf.getUser().getNick(),
+                    laf.getQuantity(), laf.getDate(), laf.getFormatStatus());
+            list.add(record);
+        }
+        return list;
     }
 }

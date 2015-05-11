@@ -19,6 +19,8 @@ public class MyDebt implements Serializable {
     private Double profit;
     private Integer iQuantity;
 
+    private String isRefund;
+
     public MyDebt() {
     }
 
@@ -86,5 +88,13 @@ public class MyDebt implements Serializable {
 
     public void setiQuantity(Integer iQuantity) {
         this.iQuantity = iQuantity;
+    }
+
+    public String getIsRefund() {
+        return isRefund;
+    }
+
+    public void setIsRefund(String isRefund) {
+        this.isRefund = isRefund;
     }
 }

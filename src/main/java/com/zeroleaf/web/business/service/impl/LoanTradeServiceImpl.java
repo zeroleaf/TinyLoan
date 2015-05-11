@@ -109,6 +109,7 @@ public class LoanTradeServiceImpl implements LoanTradeService {
             MyDebt entity = new MyDebt(laf.getTitle(), laf.getRefundDate(), laf.getRefundBalance(),
                     trade.getInvestor().getNick(), trade.getProfit(), trade.getQuantity());
             entity.setDebtor(laf.getUser().getNick());
+            entity.setIsRefund(laf.getIsRefunded() ? "是" : "否");
             myDebt.addContent(entity);
         }
         return myDebt;

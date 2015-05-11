@@ -71,4 +71,13 @@ public class AdminController {
     public String debtRecord() {
         return "admin/debt_record";
     }
+
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    public String user(@RequestParam Integer type,
+                       ModelMap map) {
+
+        map.addAttribute("type", type);
+
+        return "admin/user";
+    }
 }

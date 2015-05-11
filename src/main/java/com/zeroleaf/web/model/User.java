@@ -1,5 +1,7 @@
 package com.zeroleaf.web.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "user")
+@JsonIgnoreProperties(value = {"asset", "amountFlows", "applicationForms"})
 public class User implements Serializable {
 
     public static final int ADMIN = -1;

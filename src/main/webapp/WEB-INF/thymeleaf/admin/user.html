@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
-        <title>小微贷 - 管理员</title>
+        <title>小微贷</title>
 
         <link href="/res/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="/res/animate.css/animate.css" rel="stylesheet">
@@ -13,35 +13,37 @@
 
         <div th:include="admin/_nav::navigation"></div>
 
-        <section id="record" ng-controller="RaRecordCtrl">
+        <section id="record" ng-controller="UserCtrl">
             <div class="container">
                 <div class="info-center-block animated rollIn">
                     <div class="gray-border">
-                        <h2>充值/提现记录</h2>
+                        <h2 id="type" th:attr="data-type=${type}" th:text="${type == 1} ? '借款人' : '投资人'"></h2>
                         <div id="info" class="info" style="display: none">
-                            <p>没有历史充值/提现记录.</p>
+                            <p>没有所查类型人物信息.</p>
                         </div>
                         <div class="detail" id="detail">
                             <table class="table table-striped table-hover">
                                 <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>交易单号</th>
-                                        <th>用户名</th>
-                                        <th>交易类型</th>
-                                        <th>金额</th>
-                                        <th>交易时间</th>
-                                    </tr>
+                                <tr>
+                                    <th>#</th>
+                                    <th>用户名</th>
+                                    <th>身份证号</th>
+                                    <th>用户姓名</th>
+                                    <th>手机号码</th>
+                                    <th>银行卡号</th>
+                                    <th>邮件地址</th>
+                                </tr>
                                 </thead>
                                 <tbody id="amount-flow">
-                                    <tr ng-repeat="c in page.content">
-                                        <th>{{$index + 1 + page.offset()}}</th>
-                                        <th>{{c.code}}</th>
-                                        <th>{{c.username}}</th>
-                                        <th>{{c.type}}</th>
-                                        <th>{{c.amount}}</th>
-                                        <th>{{formatTime(c.date)}}</th>
-                                    </tr>
+                                <tr ng-repeat="c in page.content">
+                                    <th>{{$index + 1 + page.offset()}}</th>
+                                    <th>{{c.nick}}</th>
+                                    <th>{{c.idNumber}}</th>
+                                    <th>{{c.name}}</th>
+                                    <th>{{c.phoneNumber}}</th>
+                                    <th>{{c.cardNumber}}</th>
+                                    <th>{{c.email}}</th>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -52,7 +54,6 @@
                 </div>
             </div>
         </section>
-
 
         <script src="/res/jquery/dist/jquery.min.js"></script>
         <script src="/res/angular/angular.min.js"></script>

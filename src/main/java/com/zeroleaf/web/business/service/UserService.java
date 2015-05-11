@@ -53,4 +53,6 @@ public interface UserService {
      * @param credit 提现银行卡号.
      */
     void advance(User user, Double amount, String credit);
+
+    Page<User> getTypeUser(Integer page, Integer type);
 }

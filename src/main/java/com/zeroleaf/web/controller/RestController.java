@@ -136,4 +136,16 @@ public class RestController {
 
         return JSONUtils.toJson(record);
     }
+
+    @RequestMapping(value = "/platform/user",
+            method = {RequestMethod.GET, RequestMethod.POST},
+            produces = "text/plain;charset=UTF-8")
+    @ResponseBody
+    public String getTypeUser(@RequestParam Integer page,
+                              @RequestParam Integer type) {
+
+        Page<User> users = userService.getTypeUser(page, type);
+
+        return JSONUtils.toJson(users);
+    }
 }

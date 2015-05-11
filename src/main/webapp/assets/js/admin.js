@@ -89,3 +89,35 @@ admin.controller('RaRecordCtrl', ['$scope', function ($scope) {
 
     $scope.pageChanged();
 }]);
+
+admin.controller('UserCtrl', ['$scope', function ($scope) {
+
+    $scope.page = new PageCreater();
+
+    $scope.formatTime = formatTime;
+
+    function loadInvestorProfits(page) {
+        var type = jQuery('#type').data('type');
+        jQuery.get('/rest/platform/user', { page: page, type: type }, function (data) {
+            var d = JSON.parse(data);
+
+            if (d['totalNumber'] === 0) {
+                jQuery('#info').css('display', 'block');
+                jQuery('#detail').css('display', 'none');
+            } else {
+                jQuery('#info').css('display', 'none');
+                jQuery('#detail').css('display', 'block');
+            }
+
+            $scope.$apply(function () {
+                $scope.page = new PageCreater(d);
+            });
+        });
+    }
+
+    $scope.pageChanged = function() {
+        loadInvestorProfits($scope.page.pageNumber);
+    };
+
+    $scope.pageChanged();
+}]);

@@ -32,4 +32,8 @@ public interface UserDAO {
 
     List<LoanApplicationForm> getRefund(Long id, int limit);
 
+    long getTypeUserCount(Integer type);
+
+    List<User> getTypeUser(Integer type, int pos, int limit);
+
 }

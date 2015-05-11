@@ -1,6 +1,7 @@
 package com.zeroleaf.web.business.service.impl;
 
 import com.zeroleaf.web.business.service.LoginResult;
+import com.zeroleaf.web.business.service.Page;
 import com.zeroleaf.web.business.service.UserService;
 import com.zeroleaf.web.business.service.dto.InvestAnalysis;
 import com.zeroleaf.web.domain.dao.UserDAO;
@@ -94,5 +95,16 @@ public class UserServiceImpl implements UserService {
     public void advance(User user, Double amount, String credit) {
         User dbUser = userDAO.findById(user.getId());
         dbUser.advance(amount, credit);
+    }
+
+    @Override
+    public Page<User> getTypeUser(Integer page, Integer type) {
+        final int pageSize = 10;
+        int pos = pageSize * (page - 1);
+        long count = userDAO.getTypeUserCount(type);
+
+        Page<User> up = new Page<>(page, pageSize, count);
+        up.addContent(userDAO.getTypeUser(type, pos, pageSize));
+        return up;
     }
 }

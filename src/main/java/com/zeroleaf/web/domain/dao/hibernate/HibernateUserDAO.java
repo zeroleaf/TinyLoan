@@ -63,4 +63,22 @@ public class HibernateUserDAO implements UserDAO {
                 .setMaxResults(limit)
                 .list();
     }
+
+    @Override
+    public long getTypeUserCount(Integer type) {
+        final String hql = "SELECT COUNT (*) FROM User user WHERE user.type = :t";
+        return (long) sessionFactory.getCurrentSession().createQuery(hql)
+                .setInteger("t", type)
+                .uniqueResult();
+    }
+
+    @Override @SuppressWarnings("unchecked")
+    public List<User> getTypeUser(Integer type, int pos, int limit) {
+        final String hql = "FROM User user WHERE user.type = :t";
+        return (List<User>) sessionFactory.getCurrentSession().createQuery(hql)
+                .setInteger("t", type)
+                .setFirstResult(pos)
+                .setMaxResults(limit)
+                .list();
+    }
 }

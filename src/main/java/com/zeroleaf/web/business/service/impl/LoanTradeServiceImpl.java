@@ -95,4 +95,22 @@ public class LoanTradeServiceImpl implements LoanTradeService {
         }
         return myDebt;
     }
+
+    @Override
+    public Page<MyDebt> getAllMyDebt(Integer page) {
+        final int pageSize = 10;
+        int pos = pageSize * (page - 1);
+        long debtCount = loanTradeDAO.count();
+        Page<MyDebt> myDebt = new Page<>(page, pageSize, debtCount);
+
+        List<LoanTrade> trades = loanTradeDAO.getLoanTrade(pos, pageSize);
+        for (LoanTrade trade : trades) {
+            LoanApplicationForm laf = trade.getForm();
+            MyDebt entity = new MyDebt(laf.getTitle(), laf.getRefundDate(), laf.getRefundBalance(),
+                    trade.getInvestor().getNick(), trade.getProfit(), trade.getQuantity());
+            entity.setDebtor(laf.getUser().getNick());
+            myDebt.addContent(entity);
+        }
+        return myDebt;
+    }
 }

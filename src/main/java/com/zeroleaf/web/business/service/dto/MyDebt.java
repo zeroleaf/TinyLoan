@@ -9,6 +9,8 @@ import java.io.Serializable;
  */
 public class MyDebt implements Serializable {
 
+    private String debtor;
+
     private String loanTitle;
     private String refundDate;
     private Double refundAmount;
@@ -28,6 +30,14 @@ public class MyDebt implements Serializable {
         this.investor = investor;
         this.profit = profit;
         this.iQuantity = iQuantity;
+    }
+
+    public String getDebtor() {
+        return debtor;
+    }
+
+    public void setDebtor(String debtor) {
+        this.debtor = debtor;
     }
 
     public String getLoanTitle() {

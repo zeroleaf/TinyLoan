@@ -1,7 +1,7 @@
 
 "use strict";
 
-var admin = angular.module('admin', ['ngResource']);
+var admin = angular.module('admin', ['tinyloan']);
 
 //TODO - Point 服务端能接收 POST 请求的当前做法, 略显麻烦
 admin.config(['$httpProvider', function ($httpProvider) {
@@ -26,4 +26,66 @@ admin.directive('tyAudit', ['$http', function ($http) {
             })
         }
     }
+}]);
+
+admin.controller('DebtRecordCtrl', ['$scope', function ($scope) {
+
+    $scope.page = new PageCreater();
+
+    $scope.formatTime = formatTime;
+
+    function loadInvestorProfits(page) {
+        jQuery.get('/rest/platform/debt_record', { page: page }, function (data) {
+            var d = JSON.parse(data);
+
+            if (d['totalNumber'] === 0) {
+                jQuery('#info').css('display', 'block');
+                jQuery('#detail').css('display', 'none');
+            } else {
+                jQuery('#info').css('display', 'none');
+                jQuery('#detail').css('display', 'block');
+            }
+
+            $scope.$apply(function () {
+                $scope.page = new PageCreater(d);
+            });
+        });
+    }
+
+    $scope.pageChanged = function() {
+        loadInvestorProfits($scope.page.pageNumber);
+    };
+
+    $scope.pageChanged();
+}]);
+
+admin.controller('RaRecordCtrl', ['$scope', function ($scope) {
+
+    $scope.page = new PageCreater();
+
+    $scope.formatTime = formatTime;
+
+    function loadInvestorProfits(page) {
+        jQuery.get('/rest/platform/ra_record', { page: page }, function (data) {
+            var d = JSON.parse(data);
+
+            if (d['totalNumber'] === 0) {
+                jQuery('#info').css('display', 'block');
+                jQuery('#detail').css('display', 'none');
+            } else {
+                jQuery('#info').css('display', 'none');
+                jQuery('#detail').css('display', 'block');
+            }
+
+            $scope.$apply(function () {
+                $scope.page = new PageCreater(d);
+            });
+        });
+    }
+
+    $scope.pageChanged = function() {
+        loadInvestorProfits($scope.page.pageNumber);
+    };
+
+    $scope.pageChanged();
 }]);

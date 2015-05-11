@@ -10,6 +10,10 @@ import java.util.List;
  */
 public interface LoanTradeDAO {
 
+    long count();
+
+    List<LoanTrade> getLoanTrade(int pos, int limit);
+
     long count(User investor);
 
     List<LoanTrade> getLoanTrade(User investor, int pos, int limit);

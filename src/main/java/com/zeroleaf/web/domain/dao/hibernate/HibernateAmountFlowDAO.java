@@ -43,4 +43,20 @@ public class HibernateAmountFlowDAO implements AmountFlowDAO {
         return (long) sessionFactory.getCurrentSession().createQuery(hql)
                 .setLong("userId", userId).uniqueResult();
     }
+
+    @Override
+    public long getRaCount() {
+        final String hql = "SELECT COUNT (*) FROM AmountFlow af WHERE af.type = 1 OR af.type = 2";
+        return (long) sessionFactory.getCurrentSession().createQuery(hql)
+                .uniqueResult();
+    }
+
+    @Override @SuppressWarnings("unchecked")
+    public List<AmountFlow> getRaAmountFlow(int pos, int limit) {
+        final String hql = "FROM AmountFlow af WHERE af.type = 1 OR af.type = 2";
+        return (List<AmountFlow>) sessionFactory.getCurrentSession().createQuery(hql)
+                .setFirstResult(pos)
+                .setMaxResults(limit)
+                .list();
+    }
 }

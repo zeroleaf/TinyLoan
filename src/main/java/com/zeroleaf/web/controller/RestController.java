@@ -3,6 +3,7 @@ package com.zeroleaf.web.controller;
 import com.zeroleaf.web.business.service.*;
 import com.zeroleaf.web.business.service.dto.InvestRecord;
 import com.zeroleaf.web.business.service.dto.MyDebt;
+import com.zeroleaf.web.business.service.dto.RaRecord;
 import com.zeroleaf.web.model.AmountFlow;
 import com.zeroleaf.web.model.LoanApplicationForm;
 import com.zeroleaf.web.model.User;
@@ -108,5 +109,31 @@ public class RestController {
         Page<MyDebt> myDebt = loanTradeService.getMyDebt(user, page);
 
         return JSONUtils.toJson(myDebt);
+    }
+
+    //----------------------------------------------------------------------
+    // Admin
+    //----------------------------------------------------------------------
+
+    @RequestMapping(value = "/platform/debt_record",
+            method = {RequestMethod.GET, RequestMethod.POST},
+            produces = "text/plain;charset=UTF-8")
+    @ResponseBody
+    public String getDebtRecord(@RequestParam Integer page) {
+
+        Page<MyDebt> myDebt = loanTradeService.getAllMyDebt(page);
+
+        return JSONUtils.toJson(myDebt);
+    }
+
+    @RequestMapping(value = "/platform/ra_record",
+            method = {RequestMethod.GET, RequestMethod.POST},
+            produces = "text/plain;charset=UTF-8")
+    @ResponseBody
+    public String getRaRecord(@RequestParam Integer page) {
+
+        Page<RaRecord> record = amountFlowService.getRaRecord(page);
+
+        return JSONUtils.toJson(record);
     }
 }

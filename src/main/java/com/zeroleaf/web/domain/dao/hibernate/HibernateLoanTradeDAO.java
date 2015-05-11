@@ -19,6 +19,22 @@ public class HibernateLoanTradeDAO implements LoanTradeDAO {
     private SessionFactory sessionFactory;
 
     @Override
+    public long count() {
+        final String hql = "SELECT COUNT (*) FROM LoanTrade";
+        return (long) sessionFactory.getCurrentSession()
+                .createQuery(hql).uniqueResult();
+    }
+
+    @Override @SuppressWarnings("unchecked")
+    public List<LoanTrade> getLoanTrade(int pos, int limit) {
+        final String hql = "FROM LoanTrade";
+        return (List<LoanTrade>) sessionFactory.getCurrentSession().createQuery(hql)
+                .setFirstResult(pos)
+                .setMaxResults(limit)
+                .list();
+    }
+
+    @Override
     public long count(User investor) {
         final String hql = "SELECT COUNT (*) FROM LoanTrade WHERE investor.id = :investorId";
         return (long) sessionFactory.getCurrentSession().createQuery(hql)

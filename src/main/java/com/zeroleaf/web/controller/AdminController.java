@@ -1,7 +1,9 @@
 package com.zeroleaf.web.controller;
 
 import com.zeroleaf.web.business.service.LoanApplicationFormService;
+import com.zeroleaf.web.business.service.UserService;
 import com.zeroleaf.web.model.LoanApplicationForm;
+import com.zeroleaf.web.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -21,13 +24,26 @@ public class AdminController {
     @Resource
     private LoanApplicationFormService loanApplicationFormService;
 
+    @Resource
+    private UserService userService;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "redirect:/login";
     }
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
-    public String index() {
+    public String index(@RequestParam(required = false) String refresh,
+                        HttpSession session, ModelMap map) {
+
+        User admin = (User) session.getAttribute("user");
+        if (refresh != null) {
+            admin = userService.findByNick(admin.getNick());
+            session.setAttribute("user", admin);
+        }
+
+        map.addAttribute("user", admin);
+
         return "admin/index";
     }
 
@@ -49,5 +65,10 @@ public class AdminController {
     @RequestMapping(value = "app_record", method = RequestMethod.GET)
     public String appRecord() {
         return "admin/app_record";
+    }
+
+    @RequestMapping(value = "/debt_record", method = RequestMethod.GET)
+    public String debtRecord() {
+        return "admin/debt_record";
     }
 }

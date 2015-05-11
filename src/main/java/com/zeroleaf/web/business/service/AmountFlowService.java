@@ -1,6 +1,7 @@
 package com.zeroleaf.web.business.service;
 
 import com.zeroleaf.web.business.service.dto.InvestRecord;
+import com.zeroleaf.web.business.service.dto.RaRecord;
 import com.zeroleaf.web.model.AmountFlow;
 import com.zeroleaf.web.model.User;
 
@@ -17,4 +18,12 @@ public interface AmountFlowService {
      * @return
      */
     Page<AmountFlow> getProfit(User investor, int page);
+
+    /**
+     * 所有用户充值提现记录.
+     *
+     * @param page
+     * @return
+     */
+    Page<RaRecord> getRaRecord(int page);
 }

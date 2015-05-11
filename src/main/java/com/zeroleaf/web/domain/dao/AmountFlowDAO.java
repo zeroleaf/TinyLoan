@@ -15,4 +15,8 @@ public interface AmountFlowDAO {
 
     long count(long userId);
 
+    long getRaCount();
+
+    List<AmountFlow> getRaAmountFlow(int pos, int limit);
+
 }

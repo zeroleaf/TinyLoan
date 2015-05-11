@@ -38,4 +38,6 @@ public interface LoanTradeService {
     double getTotalInvestAmount(User investor);
 
     Page<MyDebt> getMyDebt(User debtor, Integer page);
+
+    Page<MyDebt> getAllMyDebt(Integer page);
 }

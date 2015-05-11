@@ -1,137 +1,138 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html ng-app="admin" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>小微贷 - 管理员</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>小微贷 - 管理员</title>
 
-    <link href="/res/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/res/animate.css/animate.css" rel="stylesheet">
-    <link href="/assets/css/admin.css" rel="stylesheet">
-</head>
-<body>
+        <link href="/res/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/res/animate.css/animate.css" rel="stylesheet">
+        <link href="/assets/css/admin.css" rel="stylesheet">
+    </head>
+    <body>
 
-    <div th:include="admin/_nav::navigation"></div>
+        <div th:include="admin/_nav::navigation"></div>
 
+        <section id="main-body">
 
-    <section id="main-body">
+            <div id="wrapper">
 
-        <div id="wrapper">
-
-            <!-- Sidebar -->
-            <div id="sidebar-wrapper">
-                <ul class="sidebar-nav">
-                    <li class="sidebar-brand"><a href="#">功能选项</a></li>
-                    <li><a href="/admin/audit">借款申请审核</a></li>
-                    <li>
-                        <a href="#" class="sub_toggle">信息查询</a>
-                        <ul class="sub_menu">
-                            <li><a href="#">借款交易记录</a></li>
-                            <li><a href="ra_record">用户充值/提现记录</a></li>
-                            <li>
-                                <a href="#" class="sub_toggle">用户个人信息</a>
-                                <ul class="sub_menu">
-                                    <li><a href="#">投资人信息</a></li>
-                                    <li><a href="#">借款人信息</a></li>
-                                    <li><a href="#">找人</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="app_record">借款申请记录</a></li>
-                            <li><a href="#">借款还款记录</a></li>
-                            <li><a href="#">投资回款记录</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">账户明细</a></li>
-                </ul>
-            </div>
-            <!-- /#sidebar-wrapper -->
-
-            <!-- Page Content -->
-            <div id="page-content-wrapper">
-                <div class="container-fluid">
-                    <div class="row" style="margin: 60px 0">
-                        <div class="col-sm-offset-6 col-sm-4 text-right" style="font-size: 1.8em">
-                            <span>账户余额 </span>
-                            <span>_______ 元</span>
-                        </div>
-                        <div class="col-sm-2 text-left">
-                            <button type="button" class="btn btn-primary">充值</button>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-8 col-sm-offset-2" id="overdue-user">
-                            <table class="table table-hover text-center">
-                                <tr>
-                                    <th>#</th>
-                                    <th>用户</th>
-                                    <th>金额</th>
-                                    <th>到期时间</th>
-                                    <th>操作</th>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>xx</td>
-                                    <td>xx</td>
-                                    <td>xx</td>
-                                    <td><button type="button" class="btn btn-primary">催款</button></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>xx</td>
-                                    <td>xx</td>
-                                    <td>xx</td>
-                                    <td><button type="button" class="btn btn-primary">催款</button></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>xx</td>
-                                    <td>xx</td>
-                                    <td>xx</td>
-                                    <td><button type="button" class="btn btn-primary">催款</button></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>xx</td>
-                                    <td>xx</td>
-                                    <td>xx</td>
-                                    <td><button type="button" class="btn btn-primary">催款</button></td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>xx</td>
-                                    <td>xx</td>
-                                    <td>xx</td>
-                                    <td><button type="button" class="btn btn-primary">催款</button></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
+                <!-- Sidebar -->
+                <div id="sidebar-wrapper">
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-brand"><a href="#">功能选项</a></li>
+                        <li><a href="/admin/audit">借款申请审核</a></li>
+                        <li>
+                            <a href="#" class="sub_toggle">信息查询</a>
+                            <ul class="sub_menu">
+                                <li><a href="/admin/debt_record">借款交易记录</a></li>
+                                <li><a href="/admin/ra_record">用户充值/提现记录</a></li>
+                                <li>
+                                    <a href="#" class="sub_toggle">用户个人信息</a>
+                                    <ul class="sub_menu">
+                                        <li><a href="#">投资人信息</a></li>
+                                        <li><a href="#">借款人信息</a></li>
+                                        <li><a href="#">找人</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="app_record">借款申请记录</a></li>
+                                <li><a href="#">借款还款记录</a></li>
+                                <li><a href="#">投资回款记录</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">账户明细</a></li>
+                    </ul>
                 </div>
-                <button id="menu-toggle" class="btn btn-primary">侧边栏</button>
+                <!-- /#sidebar-wrapper -->
+
+                <!-- Page Content -->
+                <div id="page-content-wrapper">
+                    <div class="container-fluid">
+                        <div class="row" style="margin: 60px 0">
+                            <div class="col-sm-offset-6 col-sm-4 text-right" style="font-size: 1.8em">
+                                <span>平台余额 </span>
+                                <span id="balance" th:text="|${user.asset.balance} 元|"></span>
+                            </div>
+                            <div class="col-sm-2 text-left" ng-controller="TyModalCtrl">
+                                <button type="button" class="btn btn-primary" ng-click="openRechargeModal()">充值</button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-8 col-sm-offset-2" id="overdue-user">
+                                <table class="table table-hover text-center">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>用户</th>
+                                        <th>金额</th>
+                                        <th>到期时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>xx</td>
+                                        <td>xx</td>
+                                        <td>xx</td>
+                                        <td><button type="button" class="btn btn-primary">催款</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>xx</td>
+                                        <td>xx</td>
+                                        <td>xx</td>
+                                        <td><button type="button" class="btn btn-primary">催款</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>xx</td>
+                                        <td>xx</td>
+                                        <td>xx</td>
+                                        <td><button type="button" class="btn btn-primary">催款</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>xx</td>
+                                        <td>xx</td>
+                                        <td>xx</td>
+                                        <td><button type="button" class="btn btn-primary">催款</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>xx</td>
+                                        <td>xx</td>
+                                        <td>xx</td>
+                                        <td><button type="button" class="btn btn-primary">催款</button></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="menu-toggle" class="btn btn-primary">侧边栏</button>
+                </div>
+                <!-- /#page-content-wrapper -->
+
             </div>
-            <!-- /#page-content-wrapper -->
+            <!-- /#wrapper -->
+        </section>
 
-        </div>
-        <!-- /#wrapper -->
-    </section>
+        <script>
+    //        $("#menu-toggle").click(function(e) {
+    //            e.preventDefault();
+    //            $("#wrapper").toggleClass("toggled");
+    //        });
+    //
+    //        $('.sub_toggle').each(function (idx, ele) {
+    //            $(ele).bind('click', function (e) {
+    //                var $target = $(e.target);
+    //                $target.siblings(':last').toggleClass('toggled');
+    //            });
+    //        });
+        </script>
 
-    <script>
-        $("#menu-toggle").click(function(e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
-
-        $('.sub_toggle').each(function (idx, ele) {
-            $(ele).bind('click', function (e) {
-                var $target = $(e.target);
-                $target.siblings(':last').toggleClass('toggled');
-            });
-        });
-    </script>
-
-    <script src="/res/angular/angular.min.js"></script>
-    <script src="/res/angular-bootstrap/ui-bootstrap.min.js"></script>
-    <script src="/assets/js/debt.js"></script>
-</body>
+        <script src="/res/jquery/dist/jquery.min.js"></script>
+        <script src="/res/angular/angular.min.js"></script>
+        <script src="/res/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script src="/assets/js/tinyloan.js"></script>
+        <script src="/assets/js/admin.js"></script>
+    </body>
 </html>

@@ -1,95 +1,145 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html ng-app="admin" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>小微贷 - 管理员</title>
+
+        <link href="/res/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/res/animate.css/animate.css" rel="stylesheet">
+        <link href="/assets/css/admin.css" rel="stylesheet">
     </head>
     <body>
 
         <div th:include="admin/_nav::navigation"></div>
 
 
-        <section id="ra_record" style="margin-top: 60px">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <label class="control-label col-sm-2" style="font-size: 1.4em">从</label>
-                        <div class="col-sm-10">
-                            <input type="date" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <label class="control-label col-sm-2" style="font-size: 1.4em">到</label>
-                        <div class="col-sm-10">
-                            <input type="date" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <label class="control-label col-sm-5" style="font-size: 1.4em">用户名</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="col-sm-12 text-right">
-                            <button type="button" class="btn btn-primary">查询</button>
-                        </div>
-                    </div>
-                </div>
+        <!--<section id="ra_record" style="margin-top: 60px">-->
+            <!--<div class="container">-->
+                <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="col-sm-3">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<label class="control-label col-sm-2" style="font-size: 1.4em">从</label>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="col-sm-10">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="date" class="form-control" />&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="col-sm-3">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<label class="control-label col-sm-2" style="font-size: 1.4em">到</label>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="col-sm-10">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="date" class="form-control" />&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="col-sm-3">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<label class="control-label col-sm-5" style="font-size: 1.4em">用户名</label>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="col-sm-7">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="text" class="form-control">&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="col-sm-3">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="col-sm-12 text-right">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<button type="button" class="btn btn-primary">查询</button>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
 
-                <div class="row">
-                    <div id="record-detail">
-                        <div class="gray-border" style="margin-top: 25px">
-                            <table class="table table-hover">
-                                <tr>
-                                    <th>#</th>
-                                    <th>交易单号</th>
-                                    <th>用户号</th>
-                                    <th>交易类型</th>
-                                    <th>金额</th>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                </tr>
+                <!--<div class="row">-->
+                    <!--<div id="record-detail">-->
+                        <!--<div class="gray-border" style="margin-top: 25px">-->
+                            <!--<table class="table table-hover">-->
+                                <!--<tr>-->
+                                    <!--<th>#</th>-->
+                                    <!--<th>交易单号</th>-->
+                                    <!--<th>用户号</th>-->
+                                    <!--<th>交易类型</th>-->
+                                    <!--<th>金额</th>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td>1</td>-->
+                                    <!--<td>xxx</td>-->
+                                    <!--<td>xxx</td>-->
+                                    <!--<td>xxx</td>-->
+                                    <!--<td>xxx</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td>2</td>-->
+                                    <!--<td>xxx</td>-->
+                                    <!--<td>xxx</td>-->
+                                    <!--<td>xxx</td>-->
+                                    <!--<td>xxx</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td>3</td>-->
+                                    <!--<td>xxx</td>-->
+                                    <!--<td>xxx</td>-->
+                                    <!--<td>xxx</td>-->
+                                    <!--<td>xxx</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td>4</td>-->
+                                    <!--<td>xxx</td>-->
+                                    <!--<td>xxx</td>-->
+                                    <!--<td>xxx</td>-->
+                                    <!--<td>xxx</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<td>5</td>-->
+                                    <!--<td>xxx</td>-->
+                                    <!--<td>xxx</td>-->
+                                    <!--<td>xxx</td>-->
+                                    <!--<td>xxx</td>-->
+                                <!--</tr>-->
+                            <!--</table>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</section>-->
+
+        <section id="record" ng-controller="RaRecordCtrl">
+            <div class="container">
+                <div class="info-center-block animated rollIn">
+                    <div class="gray-border">
+                        <h2>充值/提现记录</h2>
+                        <div id="info" class="info" style="display: none">
+                            <p>没有历史充值/提现记录.</p>
+                        </div>
+                        <div class="detail" id="detail">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>交易单号</th>
+                                        <th>用户名</th>
+                                        <th>交易类型</th>
+                                        <th>金额</th>
+                                        <th>交易时间</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="amount-flow">
+                                    <tr ng-repeat="c in page.content">
+                                        <th>{{$index + 1 + page.offset()}}</th>
+                                        <th>{{c.code}}</th>
+                                        <th>{{c.username}}</th>
+                                        <th>{{c.type}}</th>
+                                        <th>{{c.amount}}</th>
+                                        <th>{{c.date}}</th>
+                                    </tr>
+                                </tbody>
                             </table>
+                        </div>
+                        <div>
+                            <pagination items-per-page="page.pageSize" total-items="page.totalNumber" ng-model="page.pageNumber" ng-change="pageChanged()"></pagination>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+
+        <script src="/res/jquery/dist/jquery.min.js"></script>
+        <script src="/res/angular/angular.min.js"></script>
+        <script src="/res/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script src="/assets/js/tinyloan.js"></script>
+        <script src="/assets/js/admin.js"></script>
     </body>
 </html>

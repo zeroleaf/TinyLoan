@@ -75,4 +75,20 @@ public class HibernateLoanApplicationFormDAO implements LoanApplicationFormDAO {
                 .setMaxResults(limit)
                 .list();
     }
+
+    @Override
+    public long count() {
+        final String hql = "SELECT COUNT (*) FROM LoanApplicationForm";
+        return (long) sessionFactory.getCurrentSession().createQuery(hql)
+                .uniqueResult();
+    }
+
+    @Override @SuppressWarnings("unchecked")
+    public List<LoanApplicationForm> getLafs(int pos, int limit) {
+        final String hql = "FROM LoanApplicationForm";
+        return (List<LoanApplicationForm>) sessionFactory.getCurrentSession().createQuery(hql)
+                .setFirstResult(pos)
+                .setMaxResults(limit)
+                .list();
+    }
 }

@@ -23,4 +23,8 @@ public interface LoanApplicationFormDAO {
     long debtCount(User debtor);
 
     List<LoanApplicationForm> getRangeDebtForms(User debtor, int pos, int limit);
+
+    long count();
+
+    List<LoanApplicationForm> getLafs(int pos, int limit);
 }

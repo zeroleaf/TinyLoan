@@ -1,6 +1,7 @@
 package com.zeroleaf.web.controller;
 
 import com.zeroleaf.web.business.service.*;
+import com.zeroleaf.web.business.service.dto.AppRecord;
 import com.zeroleaf.web.business.service.dto.InvestRecord;
 import com.zeroleaf.web.business.service.dto.MyDebt;
 import com.zeroleaf.web.business.service.dto.RaRecord;
@@ -147,5 +148,16 @@ public class RestController {
         Page<User> users = userService.getTypeUser(page, type);
 
         return JSONUtils.toJson(users);
+    }
+
+    @RequestMapping(value = "/platform/laf",
+            method = {RequestMethod.GET, RequestMethod.POST},
+            produces = "text/plain;charset=UTF-8")
+    @ResponseBody
+    public String laf(@RequestParam Integer page) {
+
+        Page<AppRecord> lafs = loanApplicationFormService.lafs(page);
+
+        return JSONUtils.toJson(lafs);
     }
 }

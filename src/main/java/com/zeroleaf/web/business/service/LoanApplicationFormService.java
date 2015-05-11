@@ -1,5 +1,6 @@
 package com.zeroleaf.web.business.service;
 
+import com.zeroleaf.web.business.service.dto.AppRecord;
 import com.zeroleaf.web.business.service.dto.MyDebt;
 import com.zeroleaf.web.model.LoanApplicationForm;
 import com.zeroleaf.web.model.User;
@@ -42,4 +43,8 @@ public interface LoanApplicationFormService {
      * @return
      */
     double getTotalDebtAmount(User debtor);
+
+    Page<AppRecord> lafs(Integer page);
+
+//    List<AppRecord> getNotRefund(int limit);
 }

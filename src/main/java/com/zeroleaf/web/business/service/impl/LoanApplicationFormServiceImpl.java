@@ -2,6 +2,7 @@ package com.zeroleaf.web.business.service.impl;
 
 import com.zeroleaf.web.business.service.LoanApplicationFormService;
 import com.zeroleaf.web.business.service.Page;
+import com.zeroleaf.web.business.service.dto.AppRecord;
 import com.zeroleaf.web.business.service.dto.InvestRecord;
 import com.zeroleaf.web.business.service.dto.MyDebt;
 import com.zeroleaf.web.domain.dao.LoanApplicationFormDAO;
@@ -112,5 +113,21 @@ public class LoanApplicationFormServiceImpl implements LoanApplicationFormServic
             totalDebtAmount += laf.getBalance();
         }
         return totalDebtAmount;
+    }
+
+    @Override
+    public Page<AppRecord> lafs(Integer page) {
+        final int pageSize = 10;
+        int pos = pageSize * (page - 1);
+        long count = loanApplicationFormDAO.count();
+
+        Page<AppRecord> p = new Page<>(page, pageSize, count);
+        List<LoanApplicationForm> lafs = loanApplicationFormDAO.getLafs(pos, pageSize);
+        for (LoanApplicationForm laf :lafs) {
+            AppRecord record = new AppRecord(laf.getCode(), laf.getUser().getNick(),
+                    laf.getQuantity(), laf.getDate(), laf.getFormatStatus());
+            p.addContent(record);
+        }
+        return p;
     }
 }

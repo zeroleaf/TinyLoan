@@ -36,7 +36,7 @@
                                 <tbody id="amount-flow">
                                     <tr ng-repeat="c in page.content">
                                         <th>{{$index + 1 + page.offset()}}</th>
-                                        <th>{{c.time}}</th>
+                                        <th>{{formatTime(c.time)}}</th>
                                         <th>{{c.tradeContent}}</th>
                                         <th>{{c.amount}}</th>
                                     </tr>

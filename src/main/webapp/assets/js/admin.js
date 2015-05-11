@@ -1,6 +1,10 @@
 
 "use strict";
 
+function toRefund() {
+    alert('您已催款');
+}
+
 var admin = angular.module('admin', ['tinyloan']);
 
 //TODO - Point 服务端能接收 POST 请求的当前做法, 略显麻烦

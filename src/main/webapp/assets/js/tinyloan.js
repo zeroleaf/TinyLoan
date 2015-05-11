@@ -134,6 +134,8 @@ angular.module('tinyloan', ['ui.bootstrap'])
 
         $scope.page = new PageCreater();
 
+        $scope.formatTime = formatTime;
+
         function loadAmountFlows(page) {
             jQuery.post('/rest/user/afs', { page: page }, function (data) {
                 var d = JSON.parse(data);

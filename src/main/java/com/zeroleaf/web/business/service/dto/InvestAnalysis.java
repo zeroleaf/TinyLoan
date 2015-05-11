@@ -25,7 +25,7 @@ public class InvestAnalysis implements Iterable<Integer> {
         if (value == null) {
             keyValues.put(key, 1);
         } else {
-            ++value;
+            keyValues.put(key, ++value);
         }
     }
 

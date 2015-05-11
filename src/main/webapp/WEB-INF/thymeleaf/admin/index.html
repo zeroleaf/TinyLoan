@@ -73,8 +73,9 @@
                                     <tr th:each="ap,status : ${aps}">
                                         <td th:text="${status.count}"></td>
                                         <td th:text="${ap.username}"></td>
+                                        <th th:text="${ap.amount}"></th>
                                         <td th:text="${ap.date}"></td>
-                                        <td><button type="button" class="btn btn-primary">催款</button></td>
+                                        <td><button type="button" class="btn btn-primary" onclick="toRefund()">催款</button></td>
                                     </tr>
                                 </table>
                             </div>

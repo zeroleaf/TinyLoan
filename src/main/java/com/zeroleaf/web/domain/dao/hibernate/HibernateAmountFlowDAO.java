@@ -53,7 +53,7 @@ public class HibernateAmountFlowDAO implements AmountFlowDAO {
 
     @Override @SuppressWarnings("unchecked")
     public List<AmountFlow> getRaAmountFlow(int pos, int limit) {
-        final String hql = "FROM AmountFlow af WHERE af.type = 1 OR af.type = 2";
+        final String hql = "FROM AmountFlow af WHERE af.type = 1 OR af.type = 2 ORDER BY af.time DESC";
         return (List<AmountFlow>) sessionFactory.getCurrentSession().createQuery(hql)
                 .setFirstResult(pos)
                 .setMaxResults(limit)

@@ -139,6 +139,7 @@ public class LoanApplicationFormServiceImpl implements LoanApplicationFormServic
         for (LoanApplicationForm laf : lafs) {
             AppRecord record = new AppRecord(laf.getCode(), laf.getUser().getNick(),
                     laf.getQuantity(), laf.getDate(), laf.getFormatStatus());
+            record.setAmount(laf.getRefundBalance());
             list.add(record);
         }
         return list;

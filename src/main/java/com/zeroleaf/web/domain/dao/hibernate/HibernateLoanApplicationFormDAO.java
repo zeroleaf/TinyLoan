@@ -2,6 +2,7 @@ package com.zeroleaf.web.domain.dao.hibernate;
 
 import com.zeroleaf.web.domain.dao.LoanApplicationFormDAO;
 import com.zeroleaf.web.model.LoanApplicationForm;
+import com.zeroleaf.web.model.User;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 
@@ -38,6 +39,22 @@ public class HibernateLoanApplicationFormDAO implements LoanApplicationFormDAO {
         return (List<LoanApplicationForm>) sessionFactory.getCurrentSession().createQuery(hql)
                 .setFirstResult(pos)
                 .setMaxResults(limit)
+                .list();
+    }
+
+    @Override @SuppressWarnings("unchecked")
+    public List<LoanApplicationForm> getToRefundForms(User debtor) {
+        final String hql = "FROM LoanApplicationForm WHERE status = 2 AND raiseQuantity >= quantity AND isRefunded = false AND user.id = :debtorId";
+        return (List<LoanApplicationForm>) sessionFactory.getCurrentSession().createQuery(hql)
+                .setLong("debtorId", debtor.getId())
+                .list();
+    }
+
+    @Override @SuppressWarnings("unchecked")
+    public List<LoanApplicationForm> getAllDebtForms(User debtor) {
+        final String hql = "FROM LoanApplicationForm WHERE user.id = :debtorId AND status = 2 AND raiseQuantity >= quantity";
+        return (List<LoanApplicationForm>) sessionFactory.getCurrentSession().createQuery(hql)
+                .setLong("debtorId", debtor.getId())
                 .list();
     }
 }

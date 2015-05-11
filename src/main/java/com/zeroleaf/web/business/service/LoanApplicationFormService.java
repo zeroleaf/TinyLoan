@@ -27,5 +27,19 @@ public interface LoanApplicationFormService {
      */
     void newRefund(User debtor, Long lafId);
 
+    /**
+     * 获取所有待还金额.
+     *
+     * @param debtor 借款人
+     * @return
+     */
+    double getToRefundBalance(User debtor);
 
+    /**
+     * 获取借款人累计借款.
+     *
+     * @param debtor 借款人.
+     * @return
+     */
+    double getTotalDebtAmount(User debtor);
 }

@@ -1,6 +1,7 @@
 package com.zeroleaf.web.domain.dao;
 
 import com.zeroleaf.web.model.LoanApplicationForm;
+import com.zeroleaf.web.model.User;
 
 import java.util.List;
 
@@ -14,4 +15,8 @@ public interface LoanApplicationFormDAO {
     LoanApplicationForm findById(Long id);
 
     List<LoanApplicationForm> getInvestable(int pos, int limit);
+
+    List<LoanApplicationForm> getToRefundForms(User debtor);
+
+    List<LoanApplicationForm> getAllDebtForms(User debtor);
 }

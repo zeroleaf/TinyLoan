@@ -91,6 +91,25 @@ public class LoanApplicationFormServiceImpl implements LoanApplicationFormServic
                 investor.profit(trade.getProfit(), laf.getTitle());
             }
         }
+    }
 
+    @Override
+    public double getToRefundBalance(User debtor) {
+        double toRefundBalance = 0;
+        List<LoanApplicationForm> lafs = loanApplicationFormDAO.getToRefundForms(debtor);
+        for (LoanApplicationForm laf : lafs) {
+            toRefundBalance += laf.getRefundBalance();
+        }
+        return toRefundBalance;
+    }
+
+    @Override
+    public double getTotalDebtAmount(User debtor) {
+        double totalDebtAmount = 0;
+        List<LoanApplicationForm> lafs = loanApplicationFormDAO.getAllDebtForms(debtor);
+        for (LoanApplicationForm laf : lafs) {
+            totalDebtAmount += laf.getBalance();
+        }
+        return totalDebtAmount;
     }
 }

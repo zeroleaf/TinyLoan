@@ -43,10 +43,14 @@ public class DebtController {
 
         List<LoanApplicationForm> refs = userService.getRefundForms(user, 5);
         List<LoanApplicationForm> lafs = userService.getLoanApplicationForms(user.getNick(), 5);
+        double toRefundBalance = loanApplicationFormService.getToRefundBalance(user);
+        double totalDebtAmount = loanApplicationFormService.getTotalDebtAmount(user);
 
         map.addAttribute("user", user);
         map.addAttribute("refs", refs);
         map.addAttribute("lafs", lafs);
+        map.addAttribute("toRefundBalance", toRefundBalance);
+        map.addAttribute("totalDebtAmount", totalDebtAmount);
 
         return "debt/index";
     }

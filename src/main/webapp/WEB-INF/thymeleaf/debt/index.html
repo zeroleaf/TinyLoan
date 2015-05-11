@@ -32,14 +32,14 @@
                         <div class="row line-item">
                             <div class="content col-sm-6">
                                 <p class="desc">待还金额</p>
-                                <p class="value">0.00</p>
+                                <p class="value" th:text="${toRefundBalance}">0.00</p>
                                 <p class="unit">元</p>
                             </div>
                         </div>
                         <div class="row line-item">
                             <div class="content col-sm-6">
                                 <p class="desc">累计借款</p>
-                                <p class="value">0.00</p>
+                                <p class="value" th:text="${totalDebtAmount}">0.00</p>
                                 <p class="unit">元</p>
                             </div>
                         </div>

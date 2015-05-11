@@ -98,4 +98,9 @@ public class DebtController {
         User user = (User) session.getAttribute("user");
         loanApplicationFormService.newRefund(user, refId);
     }
+
+    @RequestMapping(value = "/debt", method = RequestMethod.GET)
+    public String debt() {
+        return "debt/debt";
+    }
 }

@@ -19,4 +19,8 @@ public interface LoanApplicationFormDAO {
     List<LoanApplicationForm> getToRefundForms(User debtor);
 
     List<LoanApplicationForm> getAllDebtForms(User debtor);
+
+    long debtCount(User debtor);
+
+    List<LoanApplicationForm> getRangeDebtForms(User debtor, int pos, int limit);
 }

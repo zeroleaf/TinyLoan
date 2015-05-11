@@ -3,6 +3,7 @@ package com.zeroleaf.web.business.service.impl;
 import com.zeroleaf.web.business.service.LoanApplicationFormService;
 import com.zeroleaf.web.business.service.Page;
 import com.zeroleaf.web.business.service.dto.InvestRecord;
+import com.zeroleaf.web.business.service.dto.MyDebt;
 import com.zeroleaf.web.domain.dao.LoanApplicationFormDAO;
 import com.zeroleaf.web.domain.dao.LoanTradeDAO;
 import com.zeroleaf.web.domain.dao.UserDAO;

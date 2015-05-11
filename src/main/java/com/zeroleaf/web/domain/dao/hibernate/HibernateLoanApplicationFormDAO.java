@@ -57,4 +57,22 @@ public class HibernateLoanApplicationFormDAO implements LoanApplicationFormDAO {
                 .setLong("debtorId", debtor.getId())
                 .list();
     }
+
+    @Override
+    public long debtCount(User debtor) {
+        final String hql = "SELECT COUNT (*) FROM LoanApplicationForm WHERE user.id = :debtorId";
+        return (long) sessionFactory.getCurrentSession().createQuery(hql)
+                .setLong("debtorId", debtor.getId())
+                .uniqueResult();
+    }
+
+    @Override @SuppressWarnings("unchecked")
+    public List<LoanApplicationForm> getRangeDebtForms(User debtor, int pos, int limit) {
+        final String hql = "FROM LoanApplicationForm WHERE user.id = :debtorId ORDER BY date DESC";
+        return (List<LoanApplicationForm>) sessionFactory.getCurrentSession().createQuery(hql)
+                .setLong("debtorId", debtor.getId())
+                .setFirstResult(pos)
+                .setMaxResults(limit)
+                .list();
+    }
 }

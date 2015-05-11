@@ -2,7 +2,9 @@ package com.zeroleaf.web.controller;
 
 import com.zeroleaf.web.business.service.*;
 import com.zeroleaf.web.business.service.dto.InvestRecord;
+import com.zeroleaf.web.business.service.dto.MyDebt;
 import com.zeroleaf.web.model.AmountFlow;
+import com.zeroleaf.web.model.LoanApplicationForm;
 import com.zeroleaf.web.model.User;
 import com.zeroleaf.web.util.JSONUtils;
 import org.springframework.stereotype.Controller;
@@ -94,5 +96,17 @@ public class RestController {
         Page<InvestRecord> iRecord = loanTradeService.getInvestRecord(user, page);
 
         return JSONUtils.toJson(iRecord);
+    }
+
+    @RequestMapping(value = "/debtor/my_debt",
+            method = {RequestMethod.GET, RequestMethod.POST},
+            produces = "text/plain;charset=UTF-8")
+    @ResponseBody
+    public String getMyDebt(@RequestParam Integer page,
+                            HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        Page<MyDebt> myDebt = loanTradeService.getMyDebt(user, page);
+
+        return JSONUtils.toJson(myDebt);
     }
 }

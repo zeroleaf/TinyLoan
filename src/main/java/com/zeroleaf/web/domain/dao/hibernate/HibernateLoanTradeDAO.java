@@ -35,4 +35,22 @@ public class HibernateLoanTradeDAO implements LoanTradeDAO {
                 .setMaxResults(limit)
                 .list();
     }
+
+    @Override
+    public long debtCount(User debtor) {
+        final String hql = "SELECT COUNT (*) FROM LoanTrade trade INNER JOIN trade.form laf WHERE laf.user.id = :debtorId";
+        return (long) sessionFactory.getCurrentSession().createQuery(hql)
+                .setLong("debtorId", debtor.getId())
+                .uniqueResult();
+    }
+
+    @Override @SuppressWarnings("unchecked")
+    public List<LoanTrade> getDebtTrade(User debtor, int pos, int limit) {
+        final String hql = "SELECT trade FROM LoanTrade trade INNER JOIN trade.form laf WHERE laf.user.id = :debtorId ORDER BY laf.date DESC, trade.id DESC ";
+        return (List<LoanTrade>) sessionFactory.getCurrentSession().createQuery(hql)
+                .setLong("debtorId", debtor.getId())
+                .setFirstResult(pos)
+                .setMaxResults(limit)
+                .list();
+    }
 }

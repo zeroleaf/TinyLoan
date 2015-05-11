@@ -2,6 +2,7 @@ package com.zeroleaf.web.business.service;
 
 import com.zeroleaf.web.business.service.dto.InvestAnalysis;
 import com.zeroleaf.web.business.service.dto.InvestRecord;
+import com.zeroleaf.web.business.service.dto.MyDebt;
 import com.zeroleaf.web.model.User;
 
 /**
@@ -35,4 +36,6 @@ public interface LoanTradeService {
     double getTotalInvestProfit(User investor);
 
     double getTotalInvestAmount(User investor);
+
+    Page<MyDebt> getMyDebt(User debtor, Integer page);
 }

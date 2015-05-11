@@ -14,4 +14,8 @@ public interface LoanTradeDAO {
 
     List<LoanTrade> getLoanTrade(User investor, int pos, int limit);
 
+    long debtCount(User debtor);
+
+    List<LoanTrade> getDebtTrade(User debtor, int pos, int limit);
+
 }

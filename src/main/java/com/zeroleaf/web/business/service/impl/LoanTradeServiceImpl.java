@@ -4,6 +4,7 @@ import com.zeroleaf.web.business.service.LoanTradeService;
 import com.zeroleaf.web.business.service.Page;
 import com.zeroleaf.web.business.service.dto.InvestAnalysis;
 import com.zeroleaf.web.business.service.dto.InvestRecord;
+import com.zeroleaf.web.business.service.dto.MyDebt;
 import com.zeroleaf.web.domain.dao.LoanTradeDAO;
 import com.zeroleaf.web.model.LoanApplicationForm;
 import com.zeroleaf.web.model.LoanTrade;
@@ -76,5 +77,22 @@ public class LoanTradeServiceImpl implements LoanTradeService {
             totalAmount += trade.getBalance();
         }
         return totalAmount;
+    }
+
+    @Override
+    public Page<MyDebt> getMyDebt(User debtor, Integer page) {
+        final int pageSize = 10;
+        int pos = pageSize * (page - 1);
+        long debtCount = loanTradeDAO.debtCount(debtor);
+        Page<MyDebt> myDebt = new Page<>(page, pageSize, debtCount);
+
+        List<LoanTrade> trades = loanTradeDAO.getDebtTrade(debtor, pos, pageSize);
+        for (LoanTrade trade : trades) {
+            LoanApplicationForm laf = trade.getForm();
+            MyDebt entity = new MyDebt(laf.getTitle(), laf.getRefundDate(), laf.getRefundBalance(),
+                    trade.getInvestor().getNick(), trade.getProfit(), trade.getQuantity());
+            myDebt.addContent(entity);
+        }
+        return myDebt;
     }
 }
